@@ -1,0 +1,72 @@
+# ========== Node & Dependency Directories ==========
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.pnpm-store/
+
+# ========== Build Artifacts ==========
+dist/
+build/
+android/app/build/
+ios/build/
+.expo/
+.expo-shared/
+
+# ========== System Files ==========
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.tmp
+*.temp
+*.bak
+*.old
+
+# ========== OS-Specific Junk ==========
+# Windows
+AppData/
+Local Settings/
+$RECYCLE.BIN/
+*.lnk
+
+# Mac/Linux
+.cache/
+.Trash/
+.idea/
+.vscode/
+__MACOSX/
+*.sublime-workspace
+*.sublime-project
+
+# ========== Environment & Credentials ==========
+.env
+.env.*
+*.keystore
+*.jks
+*.p8
+*.p12
+*.mobileprovision
+*.cert
+
+# ========== Logs ==========
+*.log
+
+# ========== Expo Specific ==========
+*.tar.gz
+*.gz
+*.zip
+*.tgz
+*.log
+*.xcuserstate
+*.xcuserdata
+
+# ========== Temporary Files ==========
+*.tmp
+tmp/
+temp/
+
+# ========== Chrome/Browser Artifacts ==========
+*/Google/Chrome/User Data/
+*/Chrome/User Data/

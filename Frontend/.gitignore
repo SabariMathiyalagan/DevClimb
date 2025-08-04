@@ -1,0 +1,88 @@
+# ========== Node Dependencies ==========
+node_modules/
+.pnpm/
+.pnpm-debug.log*
+.yarn/
+.yarn-cache/
+.yarnrc.yml
+
+# ========== Expo ==========
+.expo/
+.expo-shared/
+*.expo
+
+# ========== Build Artifacts ==========
+dist/
+build/
+web-build/
+android/app/build/
+ios/build/
+*.bundle
+
+# ========== iOS Native ==========
+ios/Pods/
+ios/Podfile.lock
+ios/DerivedData/
+ios/*.xcworkspace
+ios/*.xcuserdata
+ios/*.xcuserstate
+ios/*.pbxuser
+
+# ========== Android Native ==========
+android/.gradle/
+android/.idea/
+android/local.properties
+android/.DS_Store
+android/captures/
+android/gradlew
+android/gradlew.bat
+android/gradle/
+android/build/
+
+# ========== Environment & Secrets ==========
+.env
+.env.*
+*.keystore
+*.jks
+*.p8
+*.p12
+*.mobileprovision
+*.cert
+credentials.json
+
+# ========== Logs ==========
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# ========== macOS & System ==========
+.DS_Store
+.Trash/
+.idea/
+.vscode/
+*.swp
+*.swo
+*.bak
+*.tmp
+*.temp
+*.old
+*.lock
+
+# ========== Misc Tools ==========
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+*.iml
+
+# ========== EAS & Expo Updates ==========
+*.tar.gz
+*.zip
+*.gz
+*.tgz
+eas.json.lock
+
+# ========== Others ==========
+*.apk
+*.aab
+*.ipa
