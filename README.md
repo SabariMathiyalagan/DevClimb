@@ -4,7 +4,7 @@
 
 DevClimb transforms your coding journey into an engaging, game-like experience with personalized learning paths, skill trees, and AI-powered guidance. Level up your development skills through quests, earn XP, unlock achievements, and climb the ranks from beginner to expert.
 
-![DevClimb Banner](https://via.placeholder.com/800x400/4B7BEC/FFFFFF?text=DevClimb+-+Gamified+Developer+Learning)
+
 
 ## ✨ Features
 
