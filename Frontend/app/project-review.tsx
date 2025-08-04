@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { colors } from '@/constants/Colors';
 
 export default function ProjectReviewScreen() {
@@ -74,7 +74,7 @@ export default function ProjectReviewScreen() {
         {/* Header */}
         <View style={styles.header}>
           <View style={styles.statusBadge}>
-            <FontAwesome name="check-circle" size={16} color={colors.success} />
+            <FontAwesome5 name="check-circle" size={16} color={colors.success} />
             <Text style={styles.statusText}>Approved</Text>
           </View>
           
@@ -93,12 +93,12 @@ export default function ProjectReviewScreen() {
           
           <View style={styles.scoreDetails}>
             <View style={styles.scoreDetail}>
-              <FontAwesome name="star" size={20} color={colors.accent} />
+              <FontAwesome5 name="star" size={20} color={colors.accent} />
               <Text style={styles.scoreDetailText}>+{reviewData.xpAwarded} XP Earned</Text>
             </View>
             
             <View style={styles.scoreDetail}>
-              <FontAwesome name="trophy" size={20} color={colors.warning} />
+              <FontAwesome5 name="trophy" size={20} color={colors.warning} />
               <Text style={styles.scoreDetailText}>Great Work!</Text>
             </View>
           </View>
@@ -121,7 +121,7 @@ export default function ProjectReviewScreen() {
           <View style={styles.feedbackList}>
             {reviewData.feedback.strengths.map((strength, index) => (
               <View key={index} style={styles.feedbackItem}>
-                <FontAwesome name="check" size={14} color={colors.success} />
+                <FontAwesome5 name="check" size={14} color={colors.success} />
                 <Text style={styles.feedbackText}>{strength}</Text>
               </View>
             ))}
@@ -134,7 +134,7 @@ export default function ProjectReviewScreen() {
           <View style={styles.feedbackList}>
             {reviewData.feedback.improvements.map((improvement, index) => (
               <View key={index} style={styles.feedbackItem}>
-                <FontAwesome name="lightbulb-o" size={14} color={colors.warning} />
+                <FontAwesome5 name="lightbulb-o" size={14} color={colors.warning} />
                 <Text style={styles.feedbackText}>{improvement}</Text>
               </View>
             ))}
@@ -159,21 +159,21 @@ export default function ProjectReviewScreen() {
           <Text style={styles.sectionTitle}>🎯 Recommended Next Steps</Text>
           <View style={styles.nextStepsList}>
             <TouchableOpacity style={styles.nextStepItem} activeOpacity={0.8}>
-              <FontAwesome name="tasks" size={16} color={colors.primary} />
+              <FontAwesome5 name="tasks" size={16} color={colors.primary} />
               <View style={styles.nextStepContent}>
                 <Text style={styles.nextStepTitle}>Try an Intermediate Quest</Text>
                 <Text style={styles.nextStepDescription}>Build on your frontend skills</Text>
               </View>
-              <FontAwesome name="chevron-right" size={16} color={colors.border} />
+              <FontAwesome5 name="chevron-right" size={16} color={colors.border} />
             </TouchableOpacity>
             
             <TouchableOpacity style={styles.nextStepItem} activeOpacity={0.8}>
-              <FontAwesome name="book" size={16} color={colors.accent} />
+              <FontAwesome5 name="book" size={16} color={colors.accent} />
               <View style={styles.nextStepContent}>
                 <Text style={styles.nextStepTitle}>Learn Performance Optimization</Text>
                 <Text style={styles.nextStepDescription}>Improve your technical skills</Text>
               </View>
-              <FontAwesome name="chevron-right" size={16} color={colors.border} />
+              <FontAwesome5 name="chevron-right" size={16} color={colors.border} />
             </TouchableOpacity>
           </View>
         </View>
@@ -186,7 +186,7 @@ export default function ProjectReviewScreen() {
           onPress={handleContinueLearning}
           activeOpacity={0.8}
         >
-          <FontAwesome name="rocket" size={16} color={colors.text} />
+          <FontAwesome5 name="rocket" size={16} color={colors.text} />
           <Text style={styles.primaryButtonText}>Continue Learning</Text>
         </TouchableOpacity>
         
@@ -195,7 +195,7 @@ export default function ProjectReviewScreen() {
           onPress={handleViewProgress}
           activeOpacity={0.8}
         >
-          <FontAwesome name="chart-line" size={16} color={colors.primary} />
+          <FontAwesome5 name="chart-line" size={16} color={colors.primary} />
           <Text style={styles.secondaryButtonText}>View Progress</Text>
         </TouchableOpacity>
       </View>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { colors } from '@/constants/Colors';
 import { Achievement } from '@/constants/MockData';
 
@@ -72,7 +72,7 @@ export default function Badge({ achievement, onPress, size = 'medium' }: BadgePr
               {achievement.icon}
             </Text>
           ) : (
-            <FontAwesome 
+            <FontAwesome5 
               name="lock" 
               size={badgeSize * 0.3} 
               color={colors.border} 
@@ -83,7 +83,7 @@ export default function Badge({ achievement, onPress, size = 'medium' }: BadgePr
         {/* Unlock Date Badge */}
         {achievement.isUnlocked && achievement.unlockedDate && size !== 'small' && (
           <View style={styles.dateBadge}>
-            <FontAwesome name="calendar" size={8} color={colors.text} />
+            <FontAwesome5 name="calendar" size={8} color={colors.text} />
           </View>
         )}
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { colors } from '@/constants/Colors';
 import { Quest } from '@/constants/MockData';
 
@@ -54,7 +54,7 @@ export default function QuestCard({ quest, onPress }: QuestCardProps) {
       {/* Header */}
       <View style={styles.header}>
         <View style={styles.categoryContainer}>
-          <FontAwesome 
+          <FontAwesome5 
             name={getCategoryIcon(quest.category) as any} 
             size={16} 
             color={colors.primary} 
@@ -65,7 +65,7 @@ export default function QuestCard({ quest, onPress }: QuestCardProps) {
         <View style={styles.statusContainer}>
           {quest.isCompleted ? (
             <View style={styles.completedBadge}>
-              <FontAwesome name="check" size={12} color={colors.text} />
+              <FontAwesome5 name="check" size={12} color={colors.text} />
               <Text style={styles.completedText}>Completed</Text>
             </View>
           ) : (
@@ -92,12 +92,12 @@ export default function QuestCard({ quest, onPress }: QuestCardProps) {
       <View style={styles.footer}>
         <View style={styles.leftFooter}>
           <View style={styles.xpContainer}>
-            <FontAwesome name="star" size={14} color={colors.accent} />
+            <FontAwesome5 name="star" size={14} color={colors.accent} />
             <Text style={styles.xpText}>{quest.xpReward} XP</Text>
           </View>
           
           <View style={styles.timeContainer}>
-            <FontAwesome name="clock-o" size={14} color={colors.text} />
+            <FontAwesome5 name="clock-o" size={14} color={colors.text} />
             <Text style={styles.timeText}>{quest.estimatedTime}</Text>
           </View>
         </View>
@@ -105,14 +105,14 @@ export default function QuestCard({ quest, onPress }: QuestCardProps) {
         <View style={styles.rightFooter}>
           {quest.prerequisites && quest.prerequisites.length > 0 && (
             <View style={styles.prerequisiteContainer}>
-              <FontAwesome name="link" size={12} color={colors.border} />
+              <FontAwesome5 name="link" size={12} color={colors.border} />
               <Text style={styles.prerequisiteText}>
                 {quest.prerequisites.length} prereq{quest.prerequisites.length !== 1 ? 's' : ''}
               </Text>
             </View>
           )}
           
-          <FontAwesome 
+          <FontAwesome5 
             name="chevron-right" 
             size={16} 
             color={quest.isCompleted ? colors.border : colors.primary} 
@@ -139,7 +139,7 @@ export default function QuestCard({ quest, onPress }: QuestCardProps) {
       {/* Completion Overlay */}
       {quest.isCompleted && (
         <View style={styles.completionOverlay}>
-          <FontAwesome name="check-circle" size={24} color={colors.success} />
+          <FontAwesome5 name="check-circle" size={24} color={colors.success} />
         </View>
       )}
     </TouchableOpacity>

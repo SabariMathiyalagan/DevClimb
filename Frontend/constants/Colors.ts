@@ -1,6 +1,6 @@
 // DevClimb Design System Colors
 export const colors = {
-  background: "#0A0A0A",
+  background: "#1A1A1A",
   primary: "#4B7BEC", 
   accent: "#00D1A1",
   text: "#F5F5F5",

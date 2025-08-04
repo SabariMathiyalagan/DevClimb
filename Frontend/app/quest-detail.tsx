@@ -9,7 +9,7 @@ import {
   Alert,
 } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { colors } from '@/constants/Colors';
 import { mockQuests, Quest } from '@/constants/MockData';
 
@@ -24,7 +24,7 @@ export default function QuestDetailScreen() {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.errorContainer}>
-          <FontAwesome name="exclamation-triangle" size={48} color={colors.warning} />
+          <FontAwesome5 name="exclamation-triangle" size={48} color={colors.warning} />
           <Text style={styles.errorTitle}>Quest Not Found</Text>
           <Text style={styles.errorDescription}>
             The quest you're looking for doesn't exist or has been removed.
@@ -91,7 +91,7 @@ export default function QuestDetailScreen() {
         {/* Header */}
         <View style={styles.header}>
           <View style={styles.categoryBadge}>
-            <FontAwesome name="laptop" size={16} color={colors.primary} />
+            <FontAwesome5 name="laptop" size={16} color={colors.primary} />
             <Text style={styles.categoryText}>{quest.category}</Text>
           </View>
           
@@ -107,7 +107,7 @@ export default function QuestDetailScreen() {
           <Text style={styles.title}>{quest.title}</Text>
           {quest.isCompleted && (
             <View style={styles.completedBadge}>
-              <FontAwesome name="check-circle" size={20} color={colors.success} />
+              <FontAwesome5 name="check-circle" size={20} color={colors.success} />
               <Text style={styles.completedText}>Completed</Text>
             </View>
           )}
@@ -116,12 +116,12 @@ export default function QuestDetailScreen() {
         {/* Stats */}
         <View style={styles.statsContainer}>
           <View style={styles.statItem}>
-            <FontAwesome name="star" size={16} color={colors.accent} />
+            <FontAwesome5 name="star" size={16} color={colors.accent} />
             <Text style={styles.statText}>{quest.xpReward} XP</Text>
           </View>
           
           <View style={styles.statItem}>
-            <FontAwesome name="clock-o" size={16} color={colors.text} />
+            <FontAwesome5 name="clock-o" size={16} color={colors.text} />
             <Text style={styles.statText}>{quest.estimatedTime}</Text>
           </View>
         </View>
@@ -139,7 +139,7 @@ export default function QuestDetailScreen() {
             <View style={styles.prerequisitesList}>
               {quest.prerequisites.map((prereq, index) => (
                 <View key={index} style={styles.prerequisiteItem}>
-                  <FontAwesome name="link" size={14} color={colors.primary} />
+                  <FontAwesome5 name="link" size={14} color={colors.primary} />
                   <Text style={styles.prerequisiteText}>{prereq}</Text>
                 </View>
               ))}
@@ -164,25 +164,25 @@ export default function QuestDetailScreen() {
           <Text style={styles.sectionTitle}>Learning Objectives</Text>
           <View style={styles.objectivesList}>
             <View style={styles.objectiveItem}>
-              <FontAwesome name="check" size={14} color={colors.success} />
+              <FontAwesome5 name="check" size={14} color={colors.success} />
               <Text style={styles.objectiveText}>
                 Understand the core concepts and best practices
               </Text>
             </View>
             <View style={styles.objectiveItem}>
-              <FontAwesome name="check" size={14} color={colors.success} />
+              <FontAwesome5 name="check" size={14} color={colors.success} />
               <Text style={styles.objectiveText}>
                 Build a functional project from scratch
               </Text>
             </View>
             <View style={styles.objectiveItem}>
-              <FontAwesome name="check" size={14} color={colors.success} />
+              <FontAwesome5 name="check" size={14} color={colors.success} />
               <Text style={styles.objectiveText}>
                 Apply industry-standard patterns and techniques
               </Text>
             </View>
             <View style={styles.objectiveItem}>
-              <FontAwesome name="check" size={14} color={colors.success} />
+              <FontAwesome5 name="check" size={14} color={colors.success} />
               <Text style={styles.objectiveText}>
                 Debug and optimize your implementation
               </Text>
@@ -195,21 +195,21 @@ export default function QuestDetailScreen() {
           <Text style={styles.sectionTitle}>Recommended Resources</Text>
           <View style={styles.resourcesList}>
             <TouchableOpacity style={styles.resourceItem} activeOpacity={0.8}>
-              <FontAwesome name="book" size={16} color={colors.primary} />
+              <FontAwesome5 name="book" size={16} color={colors.primary} />
               <Text style={styles.resourceText}>Official Documentation</Text>
-              <FontAwesome name="external-link" size={12} color={colors.border} />
+              <FontAwesome5 name="external-link" size={12} color={colors.border} />
             </TouchableOpacity>
             
             <TouchableOpacity style={styles.resourceItem} activeOpacity={0.8}>
-              <FontAwesome name="video-camera" size={16} color={colors.primary} />
+              <FontAwesome5 name="video-camera" size={16} color={colors.primary} />
               <Text style={styles.resourceText}>Video Tutorial Series</Text>
-              <FontAwesome name="external-link" size={12} color={colors.border} />
+              <FontAwesome5 name="external-link" size={12} color={colors.border} />
             </TouchableOpacity>
             
             <TouchableOpacity style={styles.resourceItem} activeOpacity={0.8}>
-              <FontAwesome name="github" size={16} color={colors.primary} />
+              <FontAwesome5 name="github" size={16} color={colors.primary} />
               <Text style={styles.resourceText}>Example Projects</Text>
-              <FontAwesome name="external-link" size={12} color={colors.border} />
+              <FontAwesome5 name="external-link" size={12} color={colors.border} />
             </TouchableOpacity>
           </View>
         </View>
@@ -223,7 +223,7 @@ export default function QuestDetailScreen() {
             onPress={handleSubmitProject}
             activeOpacity={0.8}
           >
-            <FontAwesome name="upload" size={16} color={colors.text} />
+            <FontAwesome5 name="upload" size={16} color={colors.text} />
             <Text style={styles.submitButtonText}>Submit Another Project</Text>
           </TouchableOpacity>
         ) : (
@@ -232,7 +232,7 @@ export default function QuestDetailScreen() {
             onPress={handleStartQuest}
             activeOpacity={0.8}
           >
-            <FontAwesome name="play" size={16} color={colors.text} />
+            <FontAwesome5 name="play" size={16} color={colors.text} />
             <Text style={styles.startButtonText}>Start Quest</Text>
           </TouchableOpacity>
         )}

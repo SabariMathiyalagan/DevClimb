@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from 'react-native';
 import { useRouter, Link } from 'expo-router';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { colors } from '@/constants/Colors';
 import { mockUser, getCompletedQuests, getActiveQuests, getUnlockedSkills } from '@/constants/MockData';
 import XPBar from '@/components/XPBar';
@@ -50,7 +50,7 @@ export default function DashboardScreen() {
       disabled={!onPress}
     >
       <View style={[styles.statIcon, { backgroundColor: color + '20' }]}>
-        <FontAwesome name={icon as any} size={24} color={color} />
+        <FontAwesome5 name={icon as any} size={24} color={color} />
       </View>
       <View style={styles.statContent}>
         <Text style={styles.statValue}>{value}</Text>
@@ -78,13 +78,13 @@ export default function DashboardScreen() {
       activeOpacity={0.8}
     >
       <View style={[styles.actionIcon, { backgroundColor: color }]}>
-        <FontAwesome name={icon as any} size={20} color={colors.text} />
+        <FontAwesome5 name={icon as any} size={20} color={colors.text} />
       </View>
       <View style={styles.actionContent}>
         <Text style={styles.actionTitle}>{title}</Text>
         <Text style={styles.actionSubtitle}>{subtitle}</Text>
       </View>
-      <FontAwesome name="chevron-right" size={16} color={colors.border} />
+      <FontAwesome5 name="chevron-right" size={16} color={colors.border} />
     </TouchableOpacity>
   );
 
@@ -98,7 +98,7 @@ export default function DashboardScreen() {
             <Text style={styles.userName}>{mockUser.name}!</Text>
           </View>
           <View style={styles.streakContainer}>
-            <FontAwesome name="fire" size={20} color={colors.warning} />
+            <FontAwesome5 name="fire" size={20} color={colors.warning} />
             <Text style={styles.streakText}>{mockUser.streak} day streak</Text>
           </View>
         </View>
@@ -168,7 +168,7 @@ export default function DashboardScreen() {
           <QuickActionCard
             title="View Progress"
             subtitle="Detailed analytics and insights"
-            icon="chart-line"
+            icon="chart-bar"
             color={colors.success}
             onPress={handleViewProgress}
           />
@@ -180,7 +180,7 @@ export default function DashboardScreen() {
           
           <View style={styles.activityCard}>
             <View style={styles.activityHeader}>
-              <FontAwesome name="check-circle" size={16} color={colors.success} />
+              <FontAwesome5 name="check-circle" size={16} color={colors.success} />
               <Text style={styles.activityTitle}>Quest Completed</Text>
               <Text style={styles.activityTime}>2 hours ago</Text>
             </View>
@@ -191,7 +191,7 @@ export default function DashboardScreen() {
 
           <View style={styles.activityCard}>
             <View style={styles.activityHeader}>
-              <FontAwesome name="trophy" size={16} color={colors.warning} />
+              <FontAwesome5 name="trophy" size={16} color={colors.warning} />
               <Text style={styles.activityTitle}>Achievement Unlocked</Text>
               <Text style={styles.activityTime}>1 day ago</Text>
             </View>
@@ -202,7 +202,7 @@ export default function DashboardScreen() {
 
           <View style={styles.activityCard}>
             <View style={styles.activityHeader}>
-              <FontAwesome name="arrow-up" size={16} color={colors.primary} />
+              <FontAwesome5 name="arrow-up" size={16} color={colors.primary} />
               <Text style={styles.activityTitle}>Level Up</Text>
               <Text style={styles.activityTime}>3 days ago</Text>
             </View>

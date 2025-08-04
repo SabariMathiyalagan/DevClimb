@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { colors } from '@/constants/Colors';
 import { Skill } from '@/constants/MockData';
 
@@ -89,7 +89,7 @@ export default function SkillNode({ skill, onPress, size = 'medium' }: SkillNode
               {skill.icon}
             </Text>
           ) : (
-            <FontAwesome 
+            <FontAwesome5 
               name="lock" 
               size={nodeSize * 0.25} 
               color={colors.border} 
@@ -107,7 +107,7 @@ export default function SkillNode({ skill, onPress, size = 'medium' }: SkillNode
         {/* Max Level Crown */}
         {isMaxLevel && (
           <View style={styles.crownContainer}>
-            <FontAwesome name="crown" size={12} color={colors.warning} />
+            <FontAwesome5 name="crown" size={12} color={colors.warning} />
           </View>
         )}
       </View>

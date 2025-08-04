@@ -7,7 +7,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { colors } from '@/constants/Colors';
 import { mockUser, mockQuests, mockSkills, mockAchievements } from '@/constants/MockData';
 
@@ -68,11 +68,11 @@ export default function ProgressTrackerScreen() {
     <View style={styles.statCard}>
       <View style={styles.statHeader}>
         <View style={[styles.statIcon, { backgroundColor: color + '20' }]}>
-          <FontAwesome name={icon as any} size={20} color={color} />
+          <FontAwesome5 name={icon as any} size={20} color={color} />
         </View>
         {change && (
           <View style={styles.changeIndicator}>
-            <FontAwesome name="arrow-up" size={12} color={colors.success} />
+            <FontAwesome5 name="arrow-up" size={12} color={colors.success} />
             <Text style={styles.changeText}>{change}</Text>
           </View>
         )}
@@ -136,7 +136,7 @@ export default function ProgressTrackerScreen() {
     return (
       <View style={styles.activityItem}>
         <View style={[styles.activityIcon, { backgroundColor: getActivityColor(activity.type) + '20' }]}>
-          <FontAwesome name={getActivityIcon(activity.type) as any} size={16} color={getActivityColor(activity.type)} />
+          <FontAwesome5 name={getActivityIcon(activity.type) as any} size={16} color={getActivityColor(activity.type)} />
         </View>
         <View style={styles.activityContent}>
           <Text style={styles.activityDescription}>{activity.description}</Text>

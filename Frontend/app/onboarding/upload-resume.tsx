@@ -8,7 +8,7 @@ import {
   Alert,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { colors } from '@/constants/Colors';
 
 export default function UploadResumeScreen() {
@@ -66,7 +66,7 @@ export default function UploadResumeScreen() {
               activeOpacity={0.8}
             >
               <View style={styles.uploadIcon}>
-                <FontAwesome name="cloud-upload" size={48} color={colors.primary} />
+                <FontAwesome5 name="cloud-upload" size={48} color={colors.primary} />
               </View>
               <Text style={styles.uploadTitle}>Tap to Upload Resume</Text>
               <Text style={styles.uploadSubtitle}>
@@ -76,7 +76,7 @@ export default function UploadResumeScreen() {
           ) : (
             <View style={styles.filePreview}>
               <View style={styles.fileInfo}>
-                <FontAwesome name="file-pdf-o" size={32} color={colors.error} />
+                <FontAwesome5 name="file-pdf-o" size={32} color={colors.error} />
                 <View style={styles.fileDetails}>
                   <Text style={styles.fileName}>{uploadedFile}</Text>
                   <Text style={styles.fileSize}>1.2 MB • PDF</Text>
@@ -86,11 +86,11 @@ export default function UploadResumeScreen() {
                   onPress={handleRemoveFile}
                   activeOpacity={0.8}
                 >
-                  <FontAwesome name="times" size={20} color={colors.text} />
+                  <FontAwesome5 name="times" size={20} color={colors.text} />
                 </TouchableOpacity>
               </View>
               <View style={styles.successIndicator}>
-                <FontAwesome name="check-circle" size={16} color={colors.success} />
+                <FontAwesome5 name="check-circle" size={16} color={colors.success} />
                 <Text style={styles.successText}>File uploaded successfully</Text>
               </View>
             </View>
@@ -101,19 +101,19 @@ export default function UploadResumeScreen() {
         <View style={styles.featuresList}>
           <Text style={styles.featuresTitle}>What happens next?</Text>
           <View style={styles.feature}>
-            <FontAwesome name="search" size={16} color={colors.primary} />
+            <FontAwesome5 name="search" size={16} color={colors.primary} />
             <Text style={styles.featureText}>AI analyzes your skills and experience</Text>
           </View>
           <View style={styles.feature}>
-            <FontAwesome name="sitemap" size={16} color={colors.primary} />
+            <FontAwesome5 name="sitemap" size={16} color={colors.primary} />
             <Text style={styles.featureText}>Creates personalized learning paths</Text>
           </View>
           <View style={styles.feature}>
-            <FontAwesome name="gamepad" size={16} color={colors.primary} />
+            <FontAwesome5 name="gamepad" size={16} color={colors.primary} />
             <Text style={styles.featureText}>Generates quests based on your goals</Text>
           </View>
           <View style={styles.feature}>
-            <FontAwesome name="trophy" size={16} color={colors.primary} />
+            <FontAwesome5 name="trophy" size={16} color={colors.primary} />
             <Text style={styles.featureText}>Sets up achievement milestones</Text>
           </View>
         </View>

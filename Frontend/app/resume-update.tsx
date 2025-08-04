@@ -9,7 +9,7 @@ import {
   Alert,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { colors } from '@/constants/Colors';
 
 export default function ResumeUpdateScreen() {
@@ -115,11 +115,11 @@ export default function ResumeUpdateScreen() {
         {/* Current Resume Status */}
         <View style={styles.statusSection}>
           <View style={styles.statusHeader}>
-            <FontAwesome name="file-text" size={24} color={colors.primary} />
+            <FontAwesome5 name="file-text" size={24} color={colors.primary} />
             <View style={styles.statusInfo}>
               <Text style={styles.statusTitle}>Current Resume</Text>
               <View style={styles.statusBadge}>
-                <FontAwesome name="check-circle" size={12} color={colors.success} />
+                <FontAwesome5 name="check-circle" size={12} color={colors.success} />
                 <Text style={styles.statusText}>{resumeData.status}</Text>
               </View>
             </View>
@@ -165,7 +165,7 @@ export default function ResumeUpdateScreen() {
           
           <View style={styles.insightCard}>
             <View style={styles.insightHeader}>
-              <FontAwesome name="lightbulb-o" size={16} color={colors.warning} />
+              <FontAwesome5 name="lightbulb-o" size={16} color={colors.warning} />
               <Text style={styles.insightTitle}>Skill Recommendations</Text>
             </View>
             <Text style={styles.insightText}>
@@ -177,7 +177,7 @@ export default function ResumeUpdateScreen() {
 
           <View style={styles.insightCard}>
             <View style={styles.insightHeader}>
-              <FontAwesome name="trending-up" size={16} color={colors.success} />
+              <FontAwesome5 name="trending-up" size={16} color={colors.success} />
               <Text style={styles.insightTitle}>Career Growth</Text>
             </View>
             <Text style={styles.insightText}>
@@ -196,14 +196,14 @@ export default function ResumeUpdateScreen() {
             onPress={handleUploadNewResume}
             activeOpacity={0.8}
           >
-            <FontAwesome name="upload" size={20} color={colors.primary} />
+            <FontAwesome5 name="upload" size={20} color={colors.primary} />
             <View style={styles.actionContent}>
               <Text style={styles.actionTitle}>Upload New Resume</Text>
               <Text style={styles.actionDescription}>
                 Replace your current resume with an updated version
               </Text>
             </View>
-            <FontAwesome name="chevron-right" size={16} color={colors.border} />
+            <FontAwesome5 name="chevron-right" size={16} color={colors.border} />
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -211,14 +211,14 @@ export default function ResumeUpdateScreen() {
             onPress={handleRequestReanalysis}
             activeOpacity={0.8}
           >
-            <FontAwesome name="refresh" size={20} color={colors.accent} />
+            <FontAwesome5 name="refresh" size={20} color={colors.accent} />
             <View style={styles.actionContent}>
               <Text style={styles.actionTitle}>Reanalyze Current Resume</Text>
               <Text style={styles.actionDescription}>
                 Get updated skill analysis with latest AI improvements
               </Text>
             </View>
-            <FontAwesome name="chevron-right" size={16} color={colors.border} />
+            <FontAwesome5 name="chevron-right" size={16} color={colors.border} />
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -226,20 +226,20 @@ export default function ResumeUpdateScreen() {
             onPress={handleViewCurrentResume}
             activeOpacity={0.8}
           >
-            <FontAwesome name="eye" size={20} color={colors.warning} />
+            <FontAwesome5 name="eye" size={20} color={colors.warning} />
             <View style={styles.actionContent}>
               <Text style={styles.actionTitle}>View Current Resume</Text>
               <Text style={styles.actionDescription}>
                 See what information was extracted from your resume
               </Text>
             </View>
-            <FontAwesome name="chevron-right" size={16} color={colors.border} />
+            <FontAwesome5 name="chevron-right" size={16} color={colors.border} />
           </TouchableOpacity>
         </View>
 
         {/* Privacy Notice */}
         <View style={styles.privacySection}>
-          <FontAwesome name="shield" size={20} color={colors.success} />
+          <FontAwesome5 name="shield" size={20} color={colors.success} />
           <View style={styles.privacyContent}>
             <Text style={styles.privacyTitle}>Privacy & Security</Text>
             <Text style={styles.privacyText}>

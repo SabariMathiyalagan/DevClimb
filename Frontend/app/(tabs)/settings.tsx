@@ -10,7 +10,7 @@ import {
   Alert,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { colors } from '@/constants/Colors';
 import { mockUser } from '@/constants/MockData';
 
@@ -48,7 +48,7 @@ export default function SettingsScreen() {
           style: 'destructive',
           onPress: () => {
             // Navigate back to onboarding
-            router.replace('/onboarding/welcome');
+            router.replace('../index');
           }
         },
       ]
@@ -94,7 +94,7 @@ export default function SettingsScreen() {
           id: 'update-resume',
           title: 'Update Resume',
           subtitle: 'Refresh your skill assessment',
-          icon: 'file-text',
+          icon: 'file-alt',
           type: 'navigation',
           onPress: handleUpdateResume,
         },
@@ -107,7 +107,7 @@ export default function SettingsScreen() {
           id: 'dark-mode',
           title: 'Dark Mode',
           subtitle: 'Use dark theme (recommended)',
-          icon: 'moon-o',
+          icon: 'moon',
           type: 'toggle',
           value: darkMode,
           onToggle: setDarkMode,
@@ -169,7 +169,7 @@ export default function SettingsScreen() {
           id: 'logout',
           title: 'Logout',
           subtitle: 'Sign out of your account',
-          icon: 'sign-out',
+          icon: 'sign-out-alt',
           type: 'action',
           onPress: handleLogout,
         },
@@ -196,7 +196,7 @@ export default function SettingsScreen() {
       activeOpacity={0.8}
     >
       <View style={styles.settingIcon}>
-        <FontAwesome 
+        <FontAwesome5 
           name={item.icon as any} 
           size={20} 
           color={item.id === 'delete' ? colors.error : colors.primary} 
@@ -222,10 +222,10 @@ export default function SettingsScreen() {
           />
         )}
         {item.type === 'navigation' && (
-          <FontAwesome name="chevron-right" size={16} color={colors.border} />
+          <FontAwesome5 name="chevron-right" size={16} color={colors.border} />
         )}
         {item.type === 'action' && item.id !== 'delete' && (
-          <FontAwesome name="chevron-right" size={16} color={colors.border} />
+          <FontAwesome5 name="chevron-right" size={16} color={colors.border} />
         )}
       </View>
     </TouchableOpacity>

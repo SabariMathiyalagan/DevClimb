@@ -10,7 +10,7 @@ import {
   Alert,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { colors } from '@/constants/Colors';
 
 interface ProjectSubmission {
@@ -123,7 +123,7 @@ export default function SubmitProjectScreen() {
               GitHub Repository URL <Text style={styles.required}>*</Text>
             </Text>
             <View style={styles.inputContainer}>
-              <FontAwesome name="github" size={20} color={colors.border} />
+              <FontAwesome5 name="github" size={20} color={colors.border} />
               <TextInput
                 style={styles.input}
                 placeholder="https://github.com/username/project-name"
@@ -140,7 +140,7 @@ export default function SubmitProjectScreen() {
           <View style={styles.inputGroup}>
             <Text style={styles.label}>Live Demo URL (Optional)</Text>
             <View style={styles.inputContainer}>
-              <FontAwesome name="link" size={20} color={colors.border} />
+              <FontAwesome5 name="link" size={20} color={colors.border} />
               <TextInput
                 style={styles.input}
                 placeholder="https://your-project.vercel.app"
@@ -206,19 +206,19 @@ export default function SubmitProjectScreen() {
           <Text style={styles.tipsTitle}>💡 Submission Tips</Text>
           <View style={styles.tipsList}>
             <View style={styles.tipItem}>
-              <FontAwesome name="check" size={14} color={colors.success} />
+              <FontAwesome5 name="check" size={14} color={colors.success} />
               <Text style={styles.tipText}>Make sure your README explains how to run the project</Text>
             </View>
             <View style={styles.tipItem}>
-              <FontAwesome name="check" size={14} color={colors.success} />
+              <FontAwesome5 name="check" size={14} color={colors.success} />
               <Text style={styles.tipText}>Include screenshots or GIFs of your project in action</Text>
             </View>
             <View style={styles.tipItem}>
-              <FontAwesome name="check" size={14} color={colors.success} />
+              <FontAwesome5 name="check" size={14} color={colors.success} />
               <Text style={styles.tipText}>Clean, well-commented code gets better feedback</Text>
             </View>
             <View style={styles.tipItem}>
-              <FontAwesome name="check" size={14} color={colors.success} />
+              <FontAwesome5 name="check" size={14} color={colors.success} />
               <Text style={styles.tipText}>Deploy your project for extra points!</Text>
             </View>
           </View>
@@ -230,7 +230,7 @@ export default function SubmitProjectScreen() {
           {exampleProjects.map((project, index) => (
             <TouchableOpacity key={index} style={styles.exampleCard} activeOpacity={0.8}>
               <View style={styles.exampleHeader}>
-                <FontAwesome name="github" size={16} color={colors.primary} />
+                <FontAwesome5 name="github" size={16} color={colors.primary} />
                 <Text style={styles.exampleTitle}>{project.title}</Text>
               </View>
               <Text style={styles.exampleDescription}>{project.description}</Text>
@@ -252,7 +252,7 @@ export default function SubmitProjectScreen() {
             <Text style={styles.submitButtonText}>Submitting...</Text>
           ) : (
             <>
-              <FontAwesome name="upload" size={16} color={colors.text} />
+              <FontAwesome5 name="upload" size={16} color={colors.text} />
               <Text style={styles.submitButtonText}>Submit Project</Text>
             </>
           )}
