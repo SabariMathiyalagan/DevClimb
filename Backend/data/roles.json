@@ -1,0 +1,232 @@
+{
+  "Frontend Developer": {
+    "skills": {
+      "HTML": 4,
+      "CSS": 4,
+      "JavaScript": 5,
+      "React": 4,
+      "TypeScript": 3,
+      "Git": 3,
+      "Responsive Design": 4,
+      "Testing": 3,
+      "Performance Optimization": 3,
+      "Build Tools": 3,
+      "State Management": 3,
+      "API Integration": 3
+    },
+    "prerequisites": ["HTML", "CSS", "JavaScript"],
+    "assessments": [
+      "Portfolio Website with 3+ projects",
+      "React Application with API integration",
+      "Responsive E-commerce site mockup",
+      "Component library documentation"
+    ],
+    "career_paths": [
+      "Senior Frontend Developer",
+      "Full Stack Developer",
+      "UI/UX Engineer",
+      "Frontend Architect"
+    ],
+    "description": "Build user interfaces and experiences for web applications using modern frontend technologies.",
+    "salary_range": "$60,000 - $130,000",
+    "job_growth": "8% (faster than average)"
+  },
+  
+  "Backend Developer": {
+    "skills": {
+      "Python": 4,
+      "SQL": 4,
+      "REST APIs": 5,
+      "Database Design": 4,
+      "Authentication": 4,
+      "Testing": 4,
+      "Docker": 3,
+      "Cloud Platforms": 3,
+      "System Design": 3,
+      "Security": 3,
+      "Caching": 3,
+      "Message Queues": 3
+    },
+    "prerequisites": ["Programming Fundamentals", "SQL", "HTTP/REST"],
+    "assessments": [
+      "REST API with authentication",
+      "Database schema design",
+      "Deployed web application",
+      "System design documentation"
+    ],
+    "career_paths": [
+      "Senior Backend Developer",
+      "Full Stack Developer", 
+      "DevOps Engineer",
+      "Solutions Architect"
+    ],
+    "description": "Design and implement server-side logic, databases, and APIs that power web applications.",
+    "salary_range": "$70,000 - $140,000",
+    "job_growth": "22% (much faster than average)"
+  },
+  
+  "Full Stack Developer": {
+    "skills": {
+      "JavaScript": 4,
+      "React": 4,
+      "Node.js": 4,
+      "SQL": 4,
+      "REST APIs": 4,
+      "Git": 3,
+      "Testing": 3,
+      "Docker": 3,
+      "Cloud Platforms": 3,
+      "System Design": 3,
+      "HTML/CSS": 4,
+      "Database Design": 3
+    },
+    "prerequisites": ["HTML", "CSS", "JavaScript", "HTTP/REST"],
+    "assessments": [
+      "Full Stack Web Application",
+      "API Design and Implementation",
+      "Database Integration",
+      "Deployment Pipeline"
+    ],
+    "career_paths": [
+      "Senior Full Stack Developer",
+      "Tech Lead",
+      "Solution Architect",
+      "Engineering Manager"
+    ],
+    "description": "Work on both frontend and backend aspects of web applications, handling the complete development stack.",
+    "salary_range": "$75,000 - $150,000",
+    "job_growth": "13% (faster than average)"
+  },
+  
+  "DevOps Engineer": {
+    "skills": {
+      "Linux": 4,
+      "Docker": 4,
+      "Kubernetes": 4,
+      "AWS": 4,
+      "CI/CD": 5,
+      "Infrastructure as Code": 4,
+      "Monitoring": 4,
+      "Security": 3,
+      "Networking": 3,
+      "Scripting": 4,
+      "Git": 4,
+      "Database Administration": 3
+    },
+    "prerequisites": ["Linux", "Networking", "Version Control"],
+    "assessments": [
+      "CI/CD Pipeline Implementation",
+      "Infrastructure as Code project",
+      "Monitoring and Alerting setup",
+      "Security audit and remediation"
+    ],
+    "career_paths": [
+      "Senior DevOps Engineer",
+      "Site Reliability Engineer",
+      "Cloud Architect",
+      "Platform Engineer"
+    ],
+    "description": "Bridge development and operations by automating deployment, scaling, and monitoring of applications.",
+    "salary_range": "$80,000 - $160,000",
+    "job_growth": "20% (much faster than average)"
+  },
+  
+  "Data Scientist": {
+    "skills": {
+      "Python": 5,
+      "SQL": 4,
+      "Statistics": 5,
+      "Machine Learning": 4,
+      "Data Visualization": 4,
+      "Pandas": 4,
+      "NumPy": 4,
+      "Scikit-learn": 4,
+      "Jupyter": 3,
+      "Git": 3,
+      "Business Intelligence": 3,
+      "A/B Testing": 3
+    },
+    "prerequisites": ["Statistics", "Programming", "Mathematics"],
+    "assessments": [
+      "End-to-end ML project",
+      "Data analysis report",
+      "Predictive model deployment",
+      "Business insights presentation"
+    ],
+    "career_paths": [
+      "Senior Data Scientist",
+      "ML Engineer",
+      "Data Science Manager",
+      "Chief Data Officer"
+    ],
+    "description": "Extract insights from data using statistical analysis, machine learning, and data visualization techniques.",
+    "salary_range": "$90,000 - $170,000",
+    "job_growth": "35% (much faster than average)"
+  },
+  
+  "Mobile Developer": {
+    "skills": {
+      "React Native": 4,
+      "JavaScript": 4,
+      "Mobile UI/UX": 4,
+      "API Integration": 4,
+      "State Management": 3,
+      "Testing": 3,
+      "App Store Deployment": 3,
+      "Performance Optimization": 3,
+      "Native Modules": 3,
+      "Git": 3,
+      "Push Notifications": 3,
+      "Offline Storage": 3
+    },
+    "prerequisites": ["JavaScript", "Mobile Design Principles"],
+    "assessments": [
+      "Cross-platform mobile app",
+      "App Store submission",
+      "Performance optimization report",
+      "Native feature integration"
+    ],
+    "career_paths": [
+      "Senior Mobile Developer",
+      "Mobile Architect",
+      "Full Stack Developer",
+      "Product Manager"
+    ],
+    "description": "Develop mobile applications for iOS and Android platforms using cross-platform or native technologies.",
+    "salary_range": "$70,000 - $140,000",
+    "job_growth": "22% (much faster than average)"
+  },
+  
+  "Product Manager": {
+    "skills": {
+      "Product Strategy": 5,
+      "User Research": 4,
+      "Data Analysis": 4,
+      "Roadmap Planning": 5,
+      "Stakeholder Management": 5,
+      "A/B Testing": 3,
+      "Wireframing": 3,
+      "Agile/Scrum": 4,
+      "Technical Understanding": 3,
+      "Market Research": 4,
+      "Communication": 5,
+      "Project Management": 4
+    },
+    "prerequisites": ["Business Analysis", "Communication", "Problem Solving"],
+    "assessments": [
+      "Product Requirements Document",
+      "Go-to-market strategy",
+      "User research findings",
+      "Product roadmap presentation"
+    ],
+    "career_paths": [
+      "Senior Product Manager",
+      "Director of Product",
+      "VP of Product",
+      "Chief Product Officer"
+    ],
+    "description": "Define product vision, strategy, and roadmap while working with engineering, design, and business teams.",
+    "salary_range": "$85,000 - $160,000",
+    "job_growth": "19% (much faster than average)"
+  }
+}
