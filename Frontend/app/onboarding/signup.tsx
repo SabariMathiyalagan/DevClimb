@@ -75,7 +75,7 @@ export default function SignupScreen() {
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       // Navigate to upload resume screen
-      router.push('/onboarding/upload-resume');
+      router.push('/(tabs)/dashboard');
     } catch (error) {
       Alert.alert('Error', 'Failed to create account. Please try again.');
     } finally {

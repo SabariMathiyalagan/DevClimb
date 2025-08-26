@@ -1,392 +1,449 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
-  TouchableOpacity,
   StyleSheet,
-  SafeAreaView,
   ScrollView,
+  TouchableOpacity,
+  Dimensions,
+  SafeAreaView,
 } from 'react-native';
-import { useRouter, Link } from 'expo-router';
-import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+//import { LineChart } from 'react-native-chart-kit';
 import { colors } from '@/constants/Colors';
-import { mockUser, getCompletedQuests, getActiveQuests, getUnlockedSkills } from '@/constants/MockData';
-import XPBar from '@/components/XPBar';
 
-export default function DashboardScreen() {
-  const router = useRouter();
+// Import your icon components - adjust imports based on your icon library
+// For example, using react-native-vector-icons or expo-vector-icons
+//import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-  const completedQuests = getCompletedQuests();
-  const activeQuests = getActiveQuests();
-  const unlockedSkills = getUnlockedSkills();
+const { width } = Dimensions.get('window');
 
-  const handleViewProgress = () => {
-    // Navigate to progress tracker screen
-    router.push('/progress-tracker');
+interface RankInfo {
+  name: string;
+  levels: number[];
+  color: string;
+  icon: string;
+}
+
+interface CurrentRank {
+  tier: string;
+  level: number;
+  rr: number;
+  totalRr: number;
+}
+
+const Dashboard: React.FC = () => {
+  const [currentRank] = useState<CurrentRank>({
+    tier: 'Gold',
+    level: 2,
+    rr: 7,
+    totalRr: 1247
+  });
+
+  const [showAllRanks, setShowAllRanks] = useState<boolean>(false);
+
+  // Sample RR growth data over time
+  const rrData = {
+    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    datasets: [{
+      data: [950, 1020, 980, 1100, 1180, 1220, 1247],
+      color: () => colors.accent,
+      strokeWidth: 3,
+    }]
   };
 
-  const handleStartQuest = () => {
-    // Navigate to quests tab
-    router.push('/(tabs)/quests');
+  const rankSystem: RankInfo[] = [
+    { name: 'Bronze', levels: [1, 2, 3], color: '#CD7F32', icon: 'medal' },
+    { name: 'Silver', levels: [1, 2, 3], color: '#C0C0C0', icon: 'star' },
+    { name: 'Gold', levels: [1, 2, 3], color: '#FFD700', icon: 'trophy' },
+    { name: 'Diamond', levels: [1, 2, 3], color: '#B9F2FF', icon: 'crown' },
+    { name: 'Infinity', levels: [1, 2, 3], color: '#FF6B6B', icon: 'infinity' }
+  ];
+
+  const getCurrentRankInfo = (): RankInfo => {
+    const rank = rankSystem.find(r => r.name === currentRank.tier);
+    return rank || rankSystem[0];
   };
 
-  const StatCard = ({ 
-    title, 
-    value, 
-    icon, 
-    color = colors.primary,
-    onPress 
-  }: {
-    title: string;
-    value: string | number;
-    icon: string;
-    color?: string;
-    onPress?: () => void;
-  }) => (
-    <TouchableOpacity 
-      style={styles.statCard} 
-      onPress={onPress}
-      activeOpacity={0.8}
-      disabled={!onPress}
-    >
-      <View style={[styles.statIcon, { backgroundColor: color + '20' }]}>
-        <FontAwesome5 name={icon as any} size={24} color={color} />
-      </View>
-      <View style={styles.statContent}>
-        <Text style={styles.statValue}>{value}</Text>
-        <Text style={styles.statTitle}>{title}</Text>
-      </View>
-    </TouchableOpacity>
-  );
+  const getRankProgress = (): number => {
+    return (currentRank.rr / 10) * 100;
+  };
 
-  const QuickActionCard = ({
-    title,
-    subtitle,
-    icon,
-    color = colors.primary,
-    onPress,
-  }: {
-    title: string;
-    subtitle: string;
-    icon: string;
-    color?: string;
-    onPress: () => void;
-  }) => (
-    <TouchableOpacity
-      style={styles.actionCard}
-      onPress={onPress}
-      activeOpacity={0.8}
-    >
-      <View style={[styles.actionIcon, { backgroundColor: color }]}>
-        <FontAwesome5 name={icon as any} size={20} color={colors.text} />
-      </View>
-      <View style={styles.actionContent}>
-        <Text style={styles.actionTitle}>{title}</Text>
-        <Text style={styles.actionSubtitle}>{subtitle}</Text>
-      </View>
-      <FontAwesome5 name="chevron-right" size={16} color={colors.border} />
-    </TouchableOpacity>
-  );
+  const currentRankInfo = getCurrentRankInfo();
+
+  const chartConfig = {
+    backgroundGradientFrom: colors.cardBackground,
+    backgroundGradientTo: colors.cardBackground,
+    color: () => colors.accent,
+    strokeWidth: 3,
+    barPercentage: 0.5,
+    useShadowColorFromDataset: false,
+    decimalPlaces: 0,
+    style: {
+      borderRadius: 16,
+    },
+    propsForLabels: {
+      fontSize: 12,
+      fontWeight: '400',
+      fill: colors.text + '80',
+    },
+    propsForBackgroundLines: {
+      strokeDasharray: '',
+      stroke: colors.border,
+      strokeWidth: 1,
+    },
+    propsForVerticalLabels: {
+      fontSize: 12,
+      fontWeight: '400',
+      fill: colors.text + '80',
+    },
+  };
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        {/* Header */}
-        <View style={styles.header}>
-          <View>
-            <Text style={styles.greeting}>Welcome back,</Text>
-            <Text style={styles.userName}>{mockUser.name}!</Text>
-          </View>
-          <View style={styles.streakContainer}>
-            <FontAwesome5 name="fire" size={20} color={colors.warning} />
-            <Text style={styles.streakText}>{mockUser.streak} day streak</Text>
-          </View>
-        </View>
+      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
 
-        {/* XP Bar */}
-        <View style={styles.xpSection}>
-          <XPBar
-            level={mockUser.level}
-            currentXP={mockUser.currentXP}
-            xpToNextLevel={mockUser.xpToNextLevel}
-            totalXP={mockUser.totalXP}
-          />
-        </View>
-
-        {/* Stats Grid */}
-        <View style={styles.statsSection}>
-          <View style={styles.statsGrid}>
-            <StatCard
-              title="Total XP"
-              value={mockUser.totalXP.toLocaleString()}
-              icon="star"
-              color={colors.primary}
-            />
-            <StatCard
-              title="Completed"
-              value={completedQuests.length}
-              icon="check-circle"
-              color={colors.success}
-              onPress={() => router.push('/(tabs)/quests')}
-            />
-            <StatCard
-              title="Active Skills"
-              value={unlockedSkills.length}
-              icon="cogs"
-              color={colors.accent}
-              onPress={() => router.push('/(tabs)/skill-tree')}
-            />
-            <StatCard
-              title="Current Level"
-              value={mockUser.level}
-              icon="trophy"
-              color={colors.warning}
-            />
-          </View>
-        </View>
-
-        {/* Quick Actions */}
-        <View style={styles.actionsSection}>
-          <Text style={styles.sectionTitle}>Quick Actions</Text>
-          
-          <QuickActionCard
-            title="Talk to AI Coach"
-            subtitle="Get personalized guidance and tips"
-            icon="comments"
-            color={colors.primary}
-            onPress={() => router.push('/modal')}
-          />
-          
-          <QuickActionCard
-            title="Start a Quest"
-            subtitle={`${activeQuests.length} quests available`}
-            icon="tasks"
-            color={colors.accent}
-            onPress={handleStartQuest}
-          />
-          
-          <QuickActionCard
-            title="View Progress"
-            subtitle="Detailed analytics and insights"
-            icon="chart-bar"
-            color={colors.success}
-            onPress={handleViewProgress}
-          />
-        </View>
-
-        {/* Recent Activity */}
-        <View style={styles.activitySection}>
-          <Text style={styles.sectionTitle}>Recent Activity</Text>
-          
-          <View style={styles.activityCard}>
-            <View style={styles.activityHeader}>
-              <FontAwesome5 name="check-circle" size={16} color={colors.success} />
-              <Text style={styles.activityTitle}>Quest Completed</Text>
-              <Text style={styles.activityTime}>2 hours ago</Text>
+        {/* Current Rank Display */}
+        <View style={[styles.rankCard, { borderColor: currentRankInfo.color + '30' }]}>
+          <View style={styles.rankCardContent}>
+            {/* Rank Icon */}
+            <View style={[styles.rankIcon, { backgroundColor: currentRankInfo.color }]}>
+               {/* <Icon name={currentRankInfo.icon} size={40} color="white" /> */}
             </View>
-            <Text style={styles.activityDescription}>
-              🎉 Completed "Build a Responsive Landing Page" and earned 100 XP!
+
+            {/* Rank Name */}
+            <Text style={[styles.rankTitle, { color: currentRankInfo.color }]}>
+              {currentRank.tier} {currentRank.level}
             </Text>
-          </View>
 
-          <View style={styles.activityCard}>
-            <View style={styles.activityHeader}>
-              <FontAwesome5 name="trophy" size={16} color={colors.warning} />
-              <Text style={styles.activityTitle}>Achievement Unlocked</Text>
-              <Text style={styles.activityTime}>1 day ago</Text>
+            {/* RR Progress */}
+            <View style={styles.progressSection}>
+              <Text style={styles.progressText}>
+                {currentRank.rr}/10 RR to next rank
+              </Text>
+              
+              {/* Progress Bar */}
+              <View style={styles.progressBarContainer}>
+                <View 
+                  style={[
+                    styles.progressBar, 
+                    { 
+                      width: `${getRankProgress()}%`,
+                      backgroundColor: currentRankInfo.color 
+                    }
+                  ]} 
+                />
+              </View>
             </View>
-            <Text style={styles.activityDescription}>
-              🏆 Earned "Week Warrior" achievement for maintaining a 7-day streak!
-            </Text>
-          </View>
 
-          <View style={styles.activityCard}>
-            <View style={styles.activityHeader}>
-              <FontAwesome5 name="arrow-up" size={16} color={colors.primary} />
-              <Text style={styles.activityTitle}>Level Up</Text>
-              <Text style={styles.activityTime}>3 days ago</Text>
-            </View>
-            <Text style={styles.activityDescription}>
-              🚀 Leveled up to Level {mockUser.level}! Keep up the great work!
+            {/* Total RR */}
+            <Text style={styles.totalRr}>
+              Total RR: {currentRank.totalRr}
             </Text>
           </View>
         </View>
+
+        {/* Stats Cards */}
+        <View style={styles.statsContainer}>
+          <View style={styles.statCard}>
+              {/* <Icon name="trending-up" size={24} color={colors.success} />   */}
+            <Text style={[styles.statValue, { color: colors.success }]}>+67</Text>
+            <Text style={styles.statLabel}>RR Today</Text>
+          </View>
+          
+          <View style={styles.statCard}>
+            {/* <Icon name="trophy" size={24} color={colors.warning} />     */}
+            <Text style={[styles.statValue, { color: colors.warning }]}>12</Text>
+            <Text style={styles.statLabel}>Win Streak</Text>
+          </View>
+        </View>
+
+        {/* RR Growth Chart */}
+        <View style={styles.chartCard}>
+          <Text style={styles.chartTitle}>RR Over Time</Text>
+          {/* <LineChart
+            data={rrData}
+            width={width - 60}
+            height={200}
+            chartConfig={chartConfig}
+            bezier
+            style={styles.chart}
+            withDots={true}
+            withShadow={false}
+            withVerticalLabels={true}
+            withHorizontalLabels={true}
+            withInnerLines={true}
+            withOuterLines={false}
+            withVerticalLines={false}
+            withHorizontalLines={true}
+            segments={4}
+          /> */}
+        </View>
+
+        {/* All Ranks Button */}
+        <TouchableOpacity
+          style={styles.allRanksButton}
+          onPress={() => setShowAllRanks(!showAllRanks)}
+          activeOpacity={0.8}
+        >
+          <Text style={styles.allRanksButtonText}>
+            {showAllRanks ? 'Hide' : 'View'} All Ranks
+          </Text>
+        </TouchableOpacity>
+
+        {/* All Ranks Display */}
+        {showAllRanks && (
+          <View style={styles.allRanksCard}>
+            <Text style={styles.allRanksTitle}>Rank System</Text>
+            
+            <View style={styles.ranksContainer}>
+              {rankSystem.map((rank) => {
+                const isCurrentRank = rank.name === currentRank.tier;
+                
+                return (
+                  <View 
+                    key={rank.name}
+                    style={[
+                      styles.rankItem,
+                      isCurrentRank && { 
+                        backgroundColor: rank.color + '20',
+                        borderColor: rank.color,
+                        borderWidth: 2
+                      }
+                    ]}
+                  >
+                    <View style={[styles.rankItemIcon, { backgroundColor: rank.color }]}>
+                      {/* <Icon name={rank.icon} size={20} color="white" /> */}
+                    </View>
+                    
+                    <View style={styles.rankItemContent}>
+                      <Text style={[
+                        styles.rankItemName,
+                        isCurrentRank && { color: rank.color }
+                      ]}>
+                        {rank.name}
+                      </Text>
+                      <Text style={styles.rankItemLevels}>
+                        Levels: {rank.levels.join(', ')}
+                      </Text>
+                    </View>
+                    
+                    {isCurrentRank && (
+                      <View style={[styles.currentBadge, { backgroundColor: rank.color + '20' }]}>
+                        <Text style={[styles.currentBadgeText, { color: rank.color }]}>
+                          Current
+                        </Text>
+                      </View>
+                    )}
+                  </View>
+                );
+              })}
+            </View>
+            
+            <View style={styles.rankSystemNote}>
+              <Text style={styles.rankSystemNoteText}>
+                📈 Earn 10 RR to advance to the next level
+              </Text>
+            </View>
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
   },
-  scrollContent: {
-    paddingBottom: 24,
+  scrollView: {
+    flex: 1,
   },
   header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 24,
-    paddingVertical: 16,
+    padding: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
   },
-  greeting: {
-    fontSize: 16,
-    color: colors.text,
-    opacity: 0.7,
-  },
-  userName: {
+  headerTitle: {
     fontSize: 24,
-    fontWeight: 'bold',
-    color: colors.text,
-  },
-  streakContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: colors.cardBackground,
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 12,
-  },
-  streakText: {
-    fontSize: 14,
-    color: colors.text,
-    marginLeft: 6,
     fontWeight: '600',
+    color: colors.text,
+    margin: 0,
   },
-  xpSection: {
-    paddingHorizontal: 24,
-    marginBottom: 24,
+  rankCard: {
+    backgroundColor: colors.cardBackground,
+    borderRadius: 16,
+    margin: 20,
+    padding: 24,
+    borderWidth: 1,
+    borderColor: colors.border,
+    alignItems: 'center',
   },
-  statsSection: {
-    paddingHorizontal: 24,
-    marginBottom: 24,
+  rankCardContent: {
+    alignItems: 'center',
+    width: '100%',
   },
-  statsGrid: {
+  rankIcon: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 16,
+  },
+  rankTitle: {
+    fontSize: 28,
+    fontWeight: '700',
+    marginBottom: 8,
+  },
+  progressSection: {
+    width: '100%',
+    marginBottom: 16,
+    alignItems: 'center',
+  },
+  progressText: {
+    fontSize: 14,
+    color: colors.text + '80',
+    marginBottom: 8,
+  },
+  progressBarContainer: {
+    width: '100%',
+    height: 8,
+    backgroundColor: colors.border,
+    borderRadius: 4,
+    overflow: 'hidden',
+  },
+  progressBar: {
+    height: '100%',
+    borderRadius: 4,
+  },
+  totalRr: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: colors.accent,
+  },
+  statsContainer: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
+    marginHorizontal: 20,
+    marginBottom: 20,
     gap: 12,
   },
   statCard: {
+    flex: 1,
     backgroundColor: colors.cardBackground,
-    borderRadius: 16,
+    borderRadius: 12,
     padding: 16,
-    flexDirection: 'row',
+    borderWidth: 1,
+    borderColor: colors.border,
     alignItems: 'center',
-    flex: 1,
-    minWidth: '45%',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  statIcon: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 12,
-  },
-  statContent: {
-    flex: 1,
   },
   statValue: {
     fontSize: 20,
-    fontWeight: 'bold',
-    color: colors.text,
-    fontFamily: 'SpaceMono',
+    fontWeight: '600',
+    marginTop: 8,
   },
-  statTitle: {
+  statLabel: {
     fontSize: 12,
-    color: colors.text,
-    opacity: 0.7,
-    marginTop: 2,
+    color: colors.text + '80',
+    marginTop: 4,
   },
-  actionsSection: {
-    paddingHorizontal: 24,
-    marginBottom: 24,
+  chartCard: {
+    backgroundColor: colors.cardBackground,
+    borderRadius: 16,
+    margin: 20,
+    padding: 20,
+    borderWidth: 1,
+    borderColor: colors.border,
   },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  chartTitle: {
+    fontSize: 18,
+    fontWeight: '600',
     color: colors.text,
     marginBottom: 16,
   },
-  actionCard: {
+  chart: {
+    borderRadius: 16,
+  },
+  allRanksButton: {
+    backgroundColor: colors.primary,
+    borderRadius: 12,
+    padding: 16,
+    marginHorizontal: 20,
+    marginBottom: 20,
+    alignItems: 'center',
+  },
+  allRanksButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  allRanksCard: {
     backgroundColor: colors.cardBackground,
     borderRadius: 16,
-    padding: 16,
+    margin: 20,
+    padding: 20,
+    borderWidth: 1,
+    borderColor: colors.border,
+  },
+  allRanksTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: colors.text,
+    textAlign: 'center',
+    marginBottom: 16,
+  },
+  ranksContainer: {
+    gap: 12,
+  },
+  rankItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
+    padding: 12,
+    backgroundColor: colors.background,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: colors.border,
   },
-  actionIcon: {
+  rankItemIcon: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
     marginRight: 12,
   },
-  actionContent: {
+  rankItemContent: {
     flex: 1,
   },
-  actionTitle: {
+  rankItemName: {
     fontSize: 16,
     fontWeight: '600',
     color: colors.text,
-    marginBottom: 2,
   },
-  actionSubtitle: {
-    fontSize: 14,
-    color: colors.text,
-    opacity: 0.7,
-  },
-  activitySection: {
-    paddingHorizontal: 24,
-  },
-  activityCard: {
-    backgroundColor: colors.cardBackground,
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 12,
-    borderLeftWidth: 4,
-    borderLeftColor: colors.primary,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  activityHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  activityTitle: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: colors.text,
-    marginLeft: 8,
-    flex: 1,
-  },
-  activityTime: {
+  rankItemLevels: {
     fontSize: 12,
-    color: colors.text,
-    opacity: 0.5,
+    color: colors.text + '80',
   },
-  activityDescription: {
+  currentBadge: {
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 6,
+  },
+  currentBadgeText: {
+    fontSize: 12,
+    fontWeight: '600',
+  },
+  rankSystemNote: {
+    marginTop: 16,
+    padding: 12,
+    backgroundColor: colors.background,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  rankSystemNoteText: {
     fontSize: 14,
-    color: colors.text,
-    opacity: 0.8,
-    lineHeight: 20,
+    color: colors.text + '80',
   },
 });
+
+export default Dashboard;

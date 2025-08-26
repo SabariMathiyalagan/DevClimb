@@ -41,10 +41,6 @@ export default function ProjectReviewScreen() {
     }
   };
 
-  const handleContinueLearning = () => {
-    // Navigate back to quests
-    router.push('/(tabs)/quests');
-  };
 
   const handleViewProgress = () => {
     // Navigate to progress tracker
@@ -183,7 +179,6 @@ export default function ProjectReviewScreen() {
       <View style={styles.actionContainer}>
         <TouchableOpacity
           style={styles.primaryButton}
-          onPress={handleContinueLearning}
           activeOpacity={0.8}
         >
           <FontAwesome5 name="rocket" size={16} color={colors.text} />

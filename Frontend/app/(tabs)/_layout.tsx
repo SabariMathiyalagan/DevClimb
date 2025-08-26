@@ -45,15 +45,19 @@ export default function TabLayout() {
           title: 'Dashboard',
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
           headerRight: () => (
-            <Link href="/modal" asChild>
+            <Pressable onPress={() => {}}>
+              {({ pressed }) => (
+                <Link href="/modal" asChild>
+                  <FontAwesome name="comments" size={22} color={colors.primary} style={{ marginRight: 16, opacity: pressed ? 0.5 : 1 }} />
+                </Link>
+              )}
+            </Pressable>
+          ),
+          headerLeft: () => (
+            <Link href="/settings" asChild>
               <Pressable>
                 {({ pressed }) => (
-                  <FontAwesome
-                    name="comments"
-                    size={25}
-                    color={colors.primary}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
+                  <FontAwesome name="cog" size={22} color={colors.text} style={{ marginLeft: 12, opacity: pressed ? 0.5 : 1 }} />
                 )}
               </Pressable>
             </Link>
@@ -61,31 +65,17 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="quests"
+        name="roadmap"
         options={{
-          title: 'Quests',
-          tabBarIcon: ({ color }) => <TabBarIcon name="tasks" color={color} />,
+          title: 'Roadmap',
+          tabBarIcon: ({ color }) => <TabBarIcon name="map" color={color} />,
         }}
       />
       <Tabs.Screen
-        name="skill-tree"
+        name="tasks"
         options={{
-          title: 'Skills',
-          tabBarIcon: ({ color }) => <TabBarIcon name="sitemap" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="achievements"
-        options={{
-          title: 'Achievements',
-          tabBarIcon: ({ color }) => <TabBarIcon name="trophy" color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="settings"
-        options={{
-          title: 'Settings',
-          tabBarIcon: ({ color }) => <TabBarIcon name="gear" color={color} />,
+          title: 'Tasks',
+          tabBarIcon: ({ color }) => <TabBarIcon name="list-ul" color={color} />,
         }}
       />
     </Tabs>

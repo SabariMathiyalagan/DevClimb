@@ -15,12 +15,12 @@ export default function WelcomeScreen() {
 
   const handleGetStarted = () => {
     // Navigate to signup screen
-    router.push('/onboarding/signup');
+    router.push('/(tabs)/dashboard');
   };
 
   const handleSignIn = () => {
     // Navigate to signup screen (same form for demo)
-    router.push('/onboarding/signup');
+    router.push('/(tabs)/dashboard');
   };
 
   return (

@@ -62,6 +62,7 @@ function RootLayoutNav() {
         
         {/* Modal Screens */}
         <Stack.Screen name="modal" options={{ presentation: 'modal', title: "AI Coach" }} />
+        <Stack.Screen name="settings" options={{ title: 'Settings', headerStyle: { backgroundColor: colors.background }, headerTintColor: colors.text }} />
         
         {/* Additional Screens */}
         <Stack.Screen name="quest-detail" options={{ title: "Quest Details", headerStyle: { backgroundColor: colors.background }, headerTintColor: colors.text }} />

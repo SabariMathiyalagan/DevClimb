@@ -97,7 +97,7 @@ export default function QuestCard({ quest, onPress }: QuestCardProps) {
           </View>
           
           <View style={styles.timeContainer}>
-            <FontAwesome5 name="clock-o" size={14} color={colors.text} />
+            <FontAwesome5 name="clock" size={14} color={colors.text} />
             <Text style={styles.timeText}>{quest.estimatedTime}</Text>
           </View>
         </View>

@@ -66,7 +66,7 @@ export default function UploadResumeScreen() {
               activeOpacity={0.8}
             >
               <View style={styles.uploadIcon}>
-                <FontAwesome5 name="cloud-upload" size={48} color={colors.primary} />
+                <FontAwesome5 name="cloud-upload-alt" size={48} color={colors.primary} />
               </View>
               <Text style={styles.uploadTitle}>Tap to Upload Resume</Text>
               <Text style={styles.uploadSubtitle}>
@@ -76,7 +76,7 @@ export default function UploadResumeScreen() {
           ) : (
             <View style={styles.filePreview}>
               <View style={styles.fileInfo}>
-                <FontAwesome5 name="file-pdf-o" size={32} color={colors.error} />
+                <FontAwesome5 name="file-pdf" size={32} color={colors.error} />
                 <View style={styles.fileDetails}>
                   <Text style={styles.fileName}>{uploadedFile}</Text>
                   <Text style={styles.fileSize}>1.2 MB • PDF</Text>
