@@ -1,0 +1,98 @@
+Alex Rodriguez
+Software Engineer
+
+CONTACT:
+Email: alex.rodriguez@email.com
+Phone: (555) 123-4567
+LinkedIn: linkedin.com/in/alexrodriguez
+GitHub: github.com/alexrodriguez
+
+SUMMARY:
+Passionate software engineer with 4+ years of experience in full-stack web development. 
+Skilled in JavaScript, React, Node.js, and cloud technologies. Strong background in 
+building scalable web applications and collaborating in agile development environments.
+
+EXPERIENCE:
+
+Senior Software Engineer | CloudTech Solutions | Jan 2022 - Present
+• Lead development of customer-facing web applications using React, TypeScript, and Next.js
+• Built RESTful APIs with Node.js and Express, serving 10,000+ daily active users
+• Implemented CI/CD pipelines using Docker and AWS services (EC2, S3, RDS)
+• Mentored 2 junior developers and conducted regular code reviews
+• Collaborated with product managers and designers in agile sprints
+• Optimized application performance, reducing load times by 35%
+
+Software Engineer | StartupHub | Jun 2020 - Dec 2021
+• Developed responsive web applications using React, HTML5, CSS3, and JavaScript
+• Created backend services with Node.js and integrated with PostgreSQL databases
+• Implemented user authentication and authorization using JWT tokens
+• Built automated testing suites using Jest and Cypress
+• Participated in daily standups and sprint planning sessions
+• Used Git for version control and collaborated through GitHub
+
+Junior Developer | WebCraft Agency | Aug 2019 - May 2020
+• Built client websites using HTML, CSS, JavaScript, and WordPress
+• Learned React fundamentals and modern JavaScript ES6+ features
+• Assisted in debugging and maintaining existing web applications
+• Gained experience with responsive design and cross-browser compatibility
+• Used basic Git commands for version control
+
+PROJECTS:
+
+E-Commerce Platform (2023)
+• Full-stack e-commerce application with user authentication, product catalog, and payment processing
+• Technologies: React, TypeScript, Node.js, Express, MongoDB, Stripe API, AWS deployment
+• Features: Shopping cart, order management, admin dashboard, email notifications
+• Implemented search functionality and product filtering
+
+Task Management SaaS (2022)
+• Multi-tenant task management application with real-time collaboration
+• Technologies: React, Socket.io, Node.js, PostgreSQL, Redis for caching
+• Features: Project workspaces, team collaboration, file attachments, notifications
+• Built REST API with comprehensive error handling and input validation
+
+Weather Dashboard (2021)
+• Weather tracking application with location-based forecasts and historical data
+• Technologies: React, Chart.js, OpenWeather API, CSS Grid, responsive design
+• Features: 7-day forecasts, interactive charts, favorite locations, dark mode
+
+Personal Portfolio (2020)
+• Professional portfolio website showcasing projects and skills
+• Technologies: HTML5, CSS3, JavaScript, responsive design, deployed on Netlify
+• Features: Project gallery, contact form, smooth animations, mobile-first design
+
+CERTIFICATIONS:
+• AWS Certified Solutions Architect Associate (2023)
+• Meta React Developer Professional Certificate (2022)
+• FreeCodeCamp Full Stack Web Development (2021)
+
+EDUCATION:
+Bachelor of Science in Computer Science
+State University | Graduated May 2019
+Relevant Coursework: Data Structures, Algorithms, Database Systems, Software Engineering
+
+TECHNICAL SKILLS:
+
+Programming Languages:
+• JavaScript (ES6+), TypeScript, Python, HTML5, CSS3, SQL
+
+Frontend Technologies:
+• React, Next.js, Vue.js (basic), Redux, Context API, CSS Grid, Flexbox, Sass/SCSS
+
+Backend Technologies:
+• Node.js, Express.js, RESTful APIs, GraphQL (basic), JWT Authentication
+
+Databases:
+• PostgreSQL, MongoDB, Redis, MySQL (basic)
+
+Cloud & DevOps:
+• AWS (EC2, S3, RDS, Lambda), Docker, CI/CD, GitHub Actions, Netlify, Vercel
+
+Tools & Others:
+• Git, GitHub, VS Code, Postman, Jest, Cypress, Figma (basic), Agile/Scrum
+
+ACHIEVEMENTS:
+• Reduced application load times by 35% through performance optimization
+• Successfully mentored 2 junior developers who were promoted within 6 months
+• Led migration of legacy PHP application to modern React/Node.js stack
+• Contributed to open-source projects with 500+ GitHub stars combined
