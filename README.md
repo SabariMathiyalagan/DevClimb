@@ -27,7 +27,7 @@ AI-powered gamified learning platform for software developers. Track your coding
 ### Installation
 
 ```bash
-git clone https://github.com/yourusername/devclimb.git
+git clone https://github.com/SabariMathiyalagan/DevClimb
 cd devclimb
 npm install
 npx expo start
