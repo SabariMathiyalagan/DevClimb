@@ -113,22 +113,41 @@ class GapAnalysisLLM:
         """
         try:
             system_prompt = """
-            You are an expert resume parser. Parse the given resume text and extract information into a structured JSON format.
+            You are an expert resume parser specializing in technical skill assessment. Parse the given resume text and extract information into a structured JSON format.
+            
+            ## SKILL RATING METHODOLOGY ##
+            
+            Rate skills based on evidence from experience, projects, and context:
+            
+            **Rating Scale (1.0-5.0, decimals allowed):**
+            - 5.0: Expert/Architect level - Leading teams, making architectural decisions, deep specialization
+            - 4.0-4.9: Advanced level - Complex implementations, mentoring others, significant experience (3+ years)
+            - 3.0-3.9: Intermediate level - Solid working knowledge, independent work, some experience (1-3 years)
+            - 2.0-2.9: Basic level - Guided work, learning phase, limited experience (<1 year)
+            - 1.0-1.9: Beginner level - Minimal exposure, just started learning
+            
+            **Rating Evidence Indicators:**
+            - Years of experience with the technology
+            - Complexity of projects using the skill
+            - Leadership/mentoring roles involving the skill
+            - Certifications or formal training
+            - Specific achievements or optimizations
+            - Context words: "lead", "architect", "optimize", "mentor", "expert", "advanced"
+            
+            **Examples:**
+            - "Lead React developer for 3 years" → React: 4.5
+            - "Built complex React applications with hooks and context" → React: 4.0
+            - "Developed responsive websites using React" → React: 3.5
+            - "Learning React fundamentals" → React: 2.0
+            - "Basic React experience" → React: 2.5
             
             Extract the following information:
-            1. Work Experience: company name, role/title, and skills used with ratings (1-5 scale)
-            2. Projects: project name, description, and skills used with ratings (1-5 scale)  
+            1. Work Experience: company name, role/title, and skills used with precise ratings
+            2. Projects: project name, description, and skills used with evidence-based ratings
             3. Certifications: certification names
-            4. Overall Skills: consolidated list of all skills with average/overall ratings
+            4. Overall Skills: consolidated list with weighted average ratings based on recency and depth
             
-            Rate skills based on:
-            - 5: Expert level, extensive experience, leadership in this skill
-            - 4: Advanced level, significant experience, can mentor others
-            - 3: Intermediate level, solid working knowledge
-            - 2: Basic level, some experience but needs guidance
-            - 1: Beginner level, minimal exposure
-            
-            Return ONLY valid JSON in this exact format:
+            Return ONLY valid JSON in this exact format:"
             {
               "work_experience": [
                 {
@@ -208,24 +227,44 @@ class GapAnalysisLLM:
                 raise ValueError(f"Target role '{target_role}' not found in skill map")
             
             system_prompt = f"""
-            You are an expert career analyst. Perform a comprehensive gap analysis comparing a candidate's resume 
-            against target role requirements.
+            You are an expert career analyst with deep understanding of skill dependencies in software development. 
+            Perform a comprehensive gap analysis comparing a candidate's resume against target role requirements.
+            
+            ## CRITICAL SKILL DEPENDENCY ANALYSIS ##
+            
+            The role requirements include "depends_on" arrays showing skill dependencies. Use this intelligence:
+            
+            **Dependency Inference Rules:**
+            1. If a candidate is proficient in a higher-level skill, they likely possess competency in its dependencies
+            2. Infer dependency skill levels as 90% of the dependent skill's level
+            3. Never downgrade explicitly mentioned skills - always use the higher of explicit vs inferred ratings
+            4. Apply transitive dependencies (if A depends on B, and B depends on C, then A implies C knowledge)
+            
+            **Examples:**
+            - React (rating 4.5) depends on ["JavaScript", "HTML5", "CSS3"]
+            - Infer: JavaScript ≈ 4.0, HTML5 ≈ 4.0, CSS3 ≈ 4.0 (unless explicitly higher)
+            - Vue.js (rating 3.0) + React (rating 4.5) both depend on JavaScript
+            - Infer: JavaScript ≈ 4.0 (take higher inference)
+            
+            ## TARGET ROLE ANALYSIS ##
             
             Target Role: {target_role}
-            Target Role Requirements: {json.dumps(role_requirements, indent=2)}
+            Role Requirements with Dependencies: {json.dumps(role_requirements, indent=2)}
             
-            Analyze the candidate's skills against the role requirements and provide:
-            1. Overall fit score (0.0 to 1.0)
-            2. Coverage metrics (required, met, partial, missing counts)
-            3. Key strengths (skills that meet or exceed requirements)
-            4. Top skill gaps (prioritized by role importance and gap size)
-            5. Category-wise breakdown
-            6. Learning roadmap with themes and sequencing
+            ## ANALYSIS REQUIREMENTS ##
             
-            Rating Guidelines:
-            - Gap = target_level - resume_rating
-            - Status: "met" (gap ≤ 0), "partial" (gap 1-2), "missing" (gap ≥ 3)
-            - Priority mapping: "High" = target level 4-5, "Medium" = target level 3
+            1. **Smart Skill Assessment**: Apply dependency inference before calculating gaps
+            2. **Realistic Gap Calculation**: Gap = target_level - (max(explicit_rating, inferred_rating))
+            3. **Intelligent Status Mapping**: 
+               - "met": gap <= 1.0 (candidate meets or nearly meets requirement)
+               - "partial": gap >= 1.1 and <= 3.9 (significant learning needed but foundation exists)
+               - "missing": gap >= 4.0 (substantial skill development required)
+            4. **Priority-Based Target Levels**: 
+               - "High" priority skills: target level 4-5
+               - "Medium" priority skills: target level 3
+            5. **Accurate Fit Score**: Weight by priority and consider dependency relationships
+            
+            ## OUTPUT REQUIREMENTS ##
             
             Return ONLY valid JSON in this exact format:
             {{
@@ -240,61 +279,60 @@ class GapAnalysisLLM:
                   "met": 0,
                   "partial": 0,
                   "missing": 0
-                }},
-                "key_strengths": [
-                  {{
-                    "skill": "Skill Name",
-                    "priority_from_role": "High/Medium",
-                    "resume_rating": 1-5
-                  }}
-                ],
-                "top_gaps": [
-                  {{
-                    "skill": "Skill Name",
-                    "gap": 1-5,
-                    "priority_from_role": "High/Medium"
-                  }}
-                ]
+                }}
               }},
               "categories": [
                 {{
                   "name": "category_name",
-                  "coverage": {{
-                    "required": 0,
-                    "met": 0,
-                    "partial": 0,
-                    "missing": 0
-                  }},
                   "skills": [
                     {{
                       "skill": "Skill Name",
                       "priority_from_role": "High/Medium",
-                      "resume_rating": 0-5,
+                      "resume_rating": 0.0,
                       "target_level": 1-5,
-                      "gap": 0-5,
+                      "gap": 0.0,
                       "status": "met/partial/missing"
                     }}
                   ]
                 }}
-              ],
-              "roadmap_seed": {{
-                "duration_weeks": 12,
-                "weekly_hours_target": 8,
-                "themes": [
-                  {{
-                    "name": "Theme Name",
-                    "skills": ["Skill1", "Skill2"],
-                    "sequence": 1
-                  }}
-                ],
-                "milestone_cadence": "biweekly"
-              }}
+              ]
             }}
+            
+            **IMPORTANT**: Use dependency inference to provide realistic, intelligent gap analysis that avoids recommending basic skills when advanced skills are already mastered.
+            """
+            
+            # Create detailed human prompt with analysis guidance
+            human_prompt = f"""
+            ## CANDIDATE RESUME DATA ##
+            {json.dumps(parsed_resume, indent=2)}
+            
+            ## ANALYSIS INSTRUCTIONS ##
+            
+            Please perform the gap analysis following these steps:
+            
+            1. **Extract Explicit Skills**: Identify all skills explicitly mentioned in the resume with their ratings
+            
+            2. **Apply Dependency Inference**: 
+               - For each high-level skill the candidate possesses, infer competency in its dependencies
+               - Use 80-90% of the parent skill's rating for dependencies
+               - Take the maximum of explicit and inferred ratings for each skill
+            
+            3. **Calculate Intelligent Gaps**:
+               - Compare inferred skill levels against role requirements
+               - Factor in skill priorities from the role requirements
+               - Use realistic gap thresholds for status determination
+            
+            4. **Generate Comprehensive Analysis**:
+               - Provide accurate fit score considering dependency relationships
+               - Count coverage metrics based on intelligent skill assessment
+               - Ensure no redundant learning recommendations for dependency skills
+            
+            Focus on creating a realistic assessment that recognizes skill transfer and dependencies.
             """
             
             messages = [
                 SystemMessage(content=system_prompt),
-                HumanMessage(content=f"Candidate Resume Data:\n{json.dumps(parsed_resume, indent=2)}")
+                HumanMessage(content=human_prompt)
             ]
             
             response = self.llm.invoke(messages)
@@ -369,115 +407,89 @@ def main():
     try:
         # Initialize analyzer
         analyzer = GapAnalysisLLM()
-        target_role = "frontend_engineer"
-        resume_text = """
-        Alex Rodriguez
-Software Engineer
-
-CONTACT:
-Email: alex.rodriguez@email.com
-Phone: (555) 123-4567
-LinkedIn: linkedin.com/in/alexrodriguez
-GitHub: github.com/alexrodriguez
-
-SUMMARY:
-Passionate software engineer with 4+ years of experience in full-stack web development. 
-Skilled in JavaScript, React, Node.js, and cloud technologies. Strong background in 
-building scalable web applications and collaborating in agile development environments.
-
-EXPERIENCE:
-
-Senior Software Engineer | CloudTech Solutions | Jan 2022 - Present
-• Lead development of customer-facing web applications using React, TypeScript, and Next.js
-• Built RESTful APIs with Node.js and Express, serving 10,000+ daily active users
-• Implemented CI/CD pipelines using Docker and AWS services (EC2, S3, RDS)
-• Mentored 2 junior developers and conducted regular code reviews
-• Collaborated with product managers and designers in agile sprints
-• Optimized application performance, reducing load times by 35%
-
-Software Engineer | StartupHub | Jun 2020 - Dec 2021
-• Developed responsive web applications using React, HTML5, CSS3, and JavaScript
-• Created backend services with Node.js and integrated with PostgreSQL databases
-• Implemented user authentication and authorization using JWT tokens
-• Built automated testing suites using Jest and Cypress
-• Participated in daily standups and sprint planning sessions
-• Used Git for version control and collaborated through GitHub
-
-Junior Developer | WebCraft Agency | Aug 2019 - May 2020
-• Built client websites using HTML, CSS, JavaScript, and WordPress
-• Learned React fundamentals and modern JavaScript ES6+ features
-• Assisted in debugging and maintaining existing web applications
-• Gained experience with responsive design and cross-browser compatibility
-• Used basic Git commands for version control
-
-PROJECTS:
-
-E-Commerce Platform (2023)
-• Full-stack e-commerce application with user authentication, product catalog, and payment processing
-• Technologies: React, TypeScript, Node.js, Express, MongoDB, Stripe API, AWS deployment
-• Features: Shopping cart, order management, admin dashboard, email notifications
-• Implemented search functionality and product filtering
-
-Task Management SaaS (2022)
-• Multi-tenant task management application with real-time collaboration
-• Technologies: React, Socket.io, Node.js, PostgreSQL, Redis for caching
-• Features: Project workspaces, team collaboration, file attachments, notifications
-• Built REST API with comprehensive error handling and input validation
-
-Weather Dashboard (2021)
-• Weather tracking application with location-based forecasts and historical data
-• Technologies: React, Chart.js, OpenWeather API, CSS Grid, responsive design
-• Features: 7-day forecasts, interactive charts, favorite locations, dark mode
-
-Personal Portfolio (2020)
-• Professional portfolio website showcasing projects and skills
-• Technologies: HTML5, CSS3, JavaScript, responsive design, deployed on Netlify
-• Features: Project gallery, contact form, smooth animations, mobile-first design
-
-CERTIFICATIONS:
-• AWS Certified Solutions Architect Associate (2023)
-• Meta React Developer Professional Certificate (2022)
-• FreeCodeCamp Full Stack Web Development (2021)
-
-EDUCATION:
-Bachelor of Science in Computer Science
-State University | Graduated May 2019
-Relevant Coursework: Data Structures, Algorithms, Database Systems, Software Engineering
-
-TECHNICAL SKILLS:
-
-Programming Languages:
-• JavaScript (ES6+), TypeScript, Python, HTML5, CSS3, SQL
-
-Frontend Technologies:
-• React, Next.js, Vue.js (basic), Redux, Context API, CSS Grid, Flexbox, Sass/SCSS
-
-Backend Technologies:
-• Node.js, Express.js, RESTful APIs, GraphQL (basic), JWT Authentication
-
-Databases:
-• PostgreSQL, MongoDB, Redis, MySQL (basic)
-
-Cloud & DevOps:
-• AWS (EC2, S3, RDS, Lambda), Docker, CI/CD, GitHub Actions, Netlify, Vercel
-
-Tools & Others:
-• Git, GitHub, VS Code, Postman, Jest, Cypress, Figma (basic), Agile/Scrum
-
-ACHIEVEMENTS:
-• Reduced application load times by 35% through performance optimization
-• Successfully mentored 2 junior developers who were promoted within 6 months
-• Led migration of legacy PHP application to modern React/Node.js stack
-• Contributed to open-source projects with 500+ GitHub stars combined
+        target_role = "full_stack_engineer"
         
-        """
+        # Load sample resume from file if available, otherwise use embedded sample
+        try:
+            with open('sample_resume.txt', 'r', encoding='utf-8') as f:
+                resume_text = f.read()
+        except FileNotFoundError:
+            resume_text = """
+            Education
+Carleton University Ottawa, ON
+Bachelor of Engineering in Software Engineering (CO-OP) 2023 - 2028 (Expected)
+• Courses: Algorithms and Data Structures, Object Oriented Software Development, Computation and Programming,
+Data Management, Foundation of Imperative Programming, Computer Organization and Architecture
+• GPA: 3.9/4.0
+• Admission Scholarship of $4,000/Year
+Certifications
+AWS Solutions Architect Associate Amazon Web Services, 2025
+Experience
+Fullstack Developer Inten May 2025 – August 2025
+JAZZ Solar Solutions Inc Ottawa, ON
+• Built a cross-platform mobile application with 10+ production-ready screens using React Native, improving user
+experience and enabling scalable feature expansion
+• Transformed the legacy backend into a fully AWS serverless architecture (Lambda, SNS, API Gateway,
+DynamoDB), resulting in a 95% reduction in cloud infrastructure costs and near-zero downtime.
+• Developed an AI-powered LangChain chatbot with Retrieval-Augmented Generation (RAG) and function calling
+to live APIs, enabling real-time responses and improving query accuracy by 40% in testing
+Fullstack Developer Intern May 2024 – August 2024
+Gnowit Inc Ottawa, ON
+• Built and managed the CRM’s entire frontend architecture, developing 50+ React components to improve user
+accessibility with intuitive data presentation and navigation
+• Improved backend features for adding and managing artifacts (e.g., organizations, contacts, tasks, etc.) in a
+MongoDB database using Node.js, allowing real-time updates and effective data handling
+• Implemented Google Calendar, Outlook Calendar, Gmail, and Outlook integration through Azure and Google
+Cloud for API connection and IMAP to streamline communication and improve scheduling functionality
+OBOTZ Robotics Instructor June 2022 – Present
+Obotz Robotics and Coding Ottawa, ON
+• Educated children aged 9-15 on robotics concepts and applications using microcontrollers and Embedded C
+programming to foster hands-on learning and build functional robotic systems
+• Effectively managed classrooms of 8+ students, ensuring an engaging and productive learning environment
+Projects
+Resume Assistant AI Source Code | React, Flask, SQLite3, Transformers, Git November 2024 - January 2025
+• Fine-tuned a LLaMA 3.2 LLM using supervised learning through the Hugging Face Transformers library on
+a resume and job description dataset, achieving a 93% accuracy in classifying resumes
+• Deployed the trained model on AWS using Hugging Face Inference Endpoints, ensuring scalable and efficient
+hosting, achieved a response time of under 1 second for real-time resume classification
+• Enhanced a Gen AI model (Microsoft Phi 3.5 Instruct) through prompt engineering, via Hugging Face’s
+serverless inference API, to deliver detailed and tailored resume feedback
+• Implemented REST API practices to allow users to add and delete resumes linked to their accounts
+Evently App | Co- Founder, React Native, Node.js, PostgreSQL April 2024 - Present
+• Developed the frontend with 5+ interactive screens in React Native, delivering a responsive and seamless interface
+• Implemented React Context to manage global state and created a custom schedule provider with an
+interactive event calendar component to allow users to dynamically store, view, and manage multiple schedules
+• Integrated Google Maps API to provide users with real-time location tracking and route calculations
+Technical Skills
+Languages: Python, Javascript, C/C++, Java, Embedded C, Kotlin
+Frameworks/Libraries: React, React Native, Node.js, Flask, Transformers, NumPy, Pandas, MongoDB, SQL
+Developer Tools: GitHub/Git, Android Studio, Firebase, PostgreSQL, Azure, Google Cloud
+
+            """
         
         # Run analysis
         result = analyzer.run_analysis(resume_text, target_role)
-        logger.info(f"Result: {result}")
+        
+        # Save result to file
+        with open('gap_analysis_result.json', 'w', encoding='utf-8') as f:
+            json.dump(result, f, indent=2, ensure_ascii=False)
+        
+        print("✅ Gap analysis completed successfully!")
+        print(f"📊 Target Role: {result['meta']['target_role']}")
+        print(f"📈 Overall Fit Score: {result['summary']['overall_fit_score']:.2f}")
+        print(f"📝 Results saved to: gap_analysis_result.json")
+        
+        # Print summary
+        coverage = result['summary']['coverage']
+        print(f"\n📋 Coverage Summary:")
+        print(f"   Total Required: {coverage['required_total']}")
+        print(f"   ✅ Met: {coverage['met']}")
+        print(f"   🟡 Partial: {coverage['partial']}")
+        print(f"   ❌ Missing: {coverage['missing']}")
 
             
     except Exception as e:
+        print(f"❌ Error: {str(e)}")
         logger.error(f"Error in main: {e}")
         return 1
     

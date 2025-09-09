@@ -1,531 +1,618 @@
 {
-    "frontend_engineer": {
-      "frontend_skills": [
-        {
-          "skill": "JavaScript",
-          "priority": "High",
-          "description": "Core programming language for web development, used for building interactive frontends."
+  "frontend_engineer": {
+    "frontend_skills": [
+      {
+        "skill": "JavaScript",
+        "priority": "High",
+        "description": "Core programming language for web development, used for building interactive frontends.",
+        "depends_on": []
+      },
+      {
+        "skill": "React",
+        "priority": "High",
+        "description": "A JavaScript library for building user interfaces, especially for single-page applications.",
+        "depends_on": ["JavaScript", "HTML5", "CSS3"]
+      },
+      {
+        "skill": "HTML5",
+        "priority": "High",
+        "description": "Markup language for structuring web content.",
+        "depends_on": []
+      },
+      {
+        "skill": "CSS3",
+        "priority": "High",
+        "description": "Styling language for web pages, including layout, colors, and fonts.",
+        "depends_on": []
+      },
+      {
+        "skill": "Vue.js",
+        "priority": "Medium",
+        "description": "Progressive JavaScript framework for building user interfaces.",
+        "depends_on": ["JavaScript", "HTML5", "CSS3"]
+      },
+      {
+        "skill": "SASS/SCSS",
+        "priority": "Medium",
+        "description": "CSS preprocessor that adds features like variables and mixins.",
+        "depends_on": ["CSS3"]
+      }
+    ],
+    "devtools": [
+      {
+        "skill": "Git",
+        "priority": "High",
+        "description": "Version control system for tracking changes in code.",
+        "depends_on": []
+      },
+      {
+        "skill": "Webpack",
+        "priority": "Medium",
+        "description": "Module bundler for JavaScript applications.",
+        "depends_on": ["JavaScript"]
+      },
+      {
+        "skill": "Babel",
+        "priority": "Medium",
+        "description": "JavaScript compiler that allows you to use the latest JavaScript syntax.",
+        "depends_on": ["JavaScript"]
+      }
+    ]
+  },
+  "backend_engineer": {
+    "backend_skills": [
+      {
+        "skill": "Node.js",
+        "priority": "High",
+        "description": "JavaScript runtime for server-side development.",
+        "depends_on": ["JavaScript"]
+      },
+      {
+        "skill": "Express.js",
+        "priority": "High",
+        "description": "Minimalist web framework for Node.js used to build RESTful APIs.",
+        "depends_on": ["Node.js"]
+      },
+      {
+        "skill": "Ruby on Rails",
+        "priority": "Medium",
+        "description": "Web application framework written in Ruby.",
+        "depends_on": []
+      },
+      {
+        "skill": "Python",
+        "priority": "Medium",
+        "description": "General-purpose programming language, often used for backend development.",
+        "depends_on": []
+      }
+    ],
+    "database_skills": [
+      {
+        "skill": "MongoDB",
+        "priority": "High",
+        "description": "NoSQL database for storing unstructured data.",
+        "depends_on": []
+      },
+      {
+        "skill": "PostgreSQL",
+        "priority": "High",
+        "description": "Relational database system with SQL compliance.",
+        "depends_on": []
+      },
+      {
+        "skill": "MySQL",
+        "priority": "Medium",
+        "description": "Widely-used relational database management system.",
+        "depends_on": []
+      }
+    ]
+  },
+  "full_stack_engineer": {
+    "frontend_skills": [
+      {
+        "skill": "JavaScript",
+        "priority": "High",
+        "description": "Core programming language for web development, used for building interactive frontends.",
+        "depends_on": []
+      },
+      {
+        "skill": "React",
+        "priority": "High",
+        "description": "A JavaScript library for building user interfaces, especially for single-page applications.",
+        "depends_on": ["JavaScript", "HTML5", "CSS3"]
+      },
+      {
+        "skill": "HTML5",
+        "priority": "High",
+        "description": "Markup language for structuring web content.",
+        "depends_on": []
+      },
+      {
+        "skill": "CSS3",
+        "priority": "High",
+        "description": "Styling language for web pages, including layout, colors, and fonts.",
+        "depends_on": []
+      },
+      {
+        "skill": "Vue.js",
+        "priority": "Medium",
+        "description": "Progressive JavaScript framework for building user interfaces.",
+        "depends_on": ["JavaScript", "HTML5", "CSS3"]
+      },
+      {
+        "skill": "SASS/SCSS",
+        "priority": "Medium",
+        "description": "CSS preprocessor that adds features like variables and mixins.",
+        "depends_on": ["CSS3"]
+      }
+    ],
+    "backend_skills": [
+      {
+        "skill": "Node.js",
+        "priority": "High",
+        "description": "JavaScript runtime for server-side development.",
+        "depends_on": ["JavaScript"]
+      },
+      {
+        "skill": "Express.js",
+        "priority": "High",
+        "description": "Minimalist web framework for Node.js used to build RESTful APIs.",
+        "depends_on": ["Node.js"]
+      },
+      {
+        "skill": "Ruby on Rails",
+        "priority": "Medium",
+        "description": "Web application framework written in Ruby.",
+        "depends_on": []
+      },
+      {
+        "skill": "Python",
+        "priority": "Medium",
+        "description": "General-purpose programming language, often used for backend development.",
+        "depends_on": []
+      }
+    ],
+    "database_skills": [
+      {
+        "skill": "MongoDB",
+        "priority": "High",
+        "description": "NoSQL database for storing unstructured data.",
+        "depends_on": []
+      },
+      {
+        "skill": "PostgreSQL",
+        "priority": "High",
+        "description": "Relational database system with SQL compliance.",
+        "depends_on": []
+      },
+      {
+        "skill": "MySQL",
+        "priority": "Medium",
+        "description": "Widely-used relational database management system.",
+        "depends_on": []
+      }
+    ],
+    "devtools": [
+      {
+        "skill": "Git",
+        "priority": "High",
+        "description": "Version control system for tracking changes in code.",
+        "depends_on": []
+      },
+      {
+        "skill": "Webpack",
+        "priority": "Medium",
+        "description": "Module bundler for JavaScript applications.",
+        "depends_on": ["JavaScript"]
+      },
+      {
+        "skill": "Babel",
+        "priority": "Medium",
+        "description": "JavaScript compiler that allows you to use the latest JavaScript syntax.",
+        "depends_on": ["JavaScript"]
+      }
+    ]
+  },
+  "mobile_engineer": {
+    "frontend_skills": [
+      {
+        "skill": "JavaScript",
+        "priority": "High",
+        "description": "Core programming language for web development, used for building interactive frontends.",
+        "depends_on": []
+      },
+      {
+        "skill": "React Native",
+        "priority": "High",
+        "description": "Framework for building mobile applications using JavaScript and React.",
+        "depends_on": ["JavaScript", "React"]
+      },
+      {
+        "skill": "Swift",
+        "priority": "High",
+        "description": "Programming language for iOS development.",
+        "depends_on": []
+      },
+      {
+        "skill": "Kotlin",
+        "priority": "High",
+        "description": "Programming language for Android development.",
+        "depends_on": []
+      }
+    ],
+    "devtools": [
+      {
+        "skill": "Xcode",
+        "priority": "High",
+        "description": "Integrated development environment (IDE) for macOS to develop iOS applications.",
+        "depends_on": []
+      },
+      {
+        "skill": "Android Studio",
+        "priority": "High",
+        "description": "Official IDE for Android development.",
+        "depends_on": []
+      }
+    ]
+  },
+  "cloud_devops_engineer": {
+    "cloud_skills": [
+      {
+        "skill": "AWS",
+        "priority": "High",
+        "description": "Cloud computing platform offering computing power, storage, and other cloud services.",
+        "depends_on": []
+      },
+      {
+        "skill": "Azure",
+        "priority": "High",
+        "description": "Cloud computing platform provided by Microsoft for building and managing applications.",
+        "depends_on": []
+      },
+      {
+        "skill": "Google Cloud",
+        "priority": "Medium",
+        "description": "Cloud computing services offered by Google.",
+        "depends_on": []
+      }
+    ],
+    "devops_tools": [
+      {
+        "skill": "Docker",
+        "priority": "High",
+        "description": "Platform for building, deploying, and running applications in containers.",
+        "depends_on": []
+      },
+      {
+        "skill": "Kubernetes",
+        "priority": "High",
+        "description": "System for automating the deployment, scaling, and management of containerized applications.",
+        "depends_on": []
+      },
+      {
+        "skill": "Jenkins",
+        "priority": "Medium",
+        "description": "Open-source automation server used for continuous integration and continuous delivery.",
+        "depends_on": []
+      }
+    ]
+  },
+  "data_engineering_engineer": {
+    "data_skills": [
+      {
+        "skill": "Python",
+        "priority": "High",
+        "description": "General-purpose programming language, often used for data processing and manipulation.",
+        "depends_on": []
+      },
+      {
+        "skill": "SQL",
+        "priority": "High",
+        "description": "Structured Query Language used to manage and query relational databases.",
+        "depends_on": []
+      },
+      {
+        "skill": "Apache Hadoop",
+        "priority": "Medium",
+        "description": "Open-source framework for storing and processing large datasets in a distributed computing environment.",
+        "depends_on": []
+      },
+      {
+        "skill": "Apache Spark",
+        "priority": "Medium",
+        "description": "Unified analytics engine for big data processing, with built-in modules for streaming, SQL, and machine learning.",
+        "depends_on": []
+      }
+    ],
+    "tools_and_frameworks": [
+      {
+        "skill": "Airflow",
+        "priority": "Medium",
+        "description": "Open-source platform for scheduling and monitoring workflows.",
+        "depends_on": []
+      },
+      {
+        "skill": "Kafka",
+        "priority": "Medium",
+        "description": "Distributed streaming platform for building real-time data pipelines.",
+        "depends_on": []
+      }
+    ]
+  },
+  "ml_ai_engineer": {
+    "ml_skills": [
+      {
+        "skill": "Python",
+        "priority": "High",
+        "description": "Programming language frequently used for machine learning and data science.",
+        "depends_on": []
+      },
+      {
+        "skill": "TensorFlow",
+        "priority": "High",
+        "description": "Open-source framework for machine learning and deep learning.",
+        "depends_on": ["Python"]
+      },
+      {
+        "skill": "PyTorch",
+        "priority": "High",
+        "description": "Deep learning framework for building and training neural networks.",
+        "depends_on": ["Python"]
+      },
+      {
+        "skill": "Scikit-learn",
+        "priority": "Medium",
+        "description": "Machine learning library for Python for data mining and data analysis.",
+        "depends_on": ["Python"]
+      }
+    ],
+    "tools_and_frameworks": [
+      {
+        "skill": "Jupyter",
+        "priority": "Medium",
+        "description": "Open-source web application for creating and sharing documents containing live code, equations, and visualizations.",
+        "depends_on": []
+      },
+      {
+        "skill": "Keras",
+        "priority": "Medium",
+        "description": "High-level neural networks API, written in Python, capable of running on top of TensorFlow.",
+        "depends_on": ["TensorFlow"]
+      }
+    ]
+  },
+  "cybersecurity_engineer": {
+    "skills": [
+      {
+        "skill": "Network Security",
+        "priority": "High",
+        "description": "Protection of networks from unauthorized access, misuse, and attacks.",
+        "depends_on": []
+      },
+      {
+        "skill": "Penetration Testing",
+        "priority": "High",
+        "description": "Simulated attacks on systems to evaluate their security.",
+        "depends_on": []
+      },
+      {
+        "skill": "Cryptography",
+        "priority": "Medium",
+        "description": "Practice of securing communication and information through codes.",
+        "depends_on": []
+      },
+      {
+        "skill": "Firewalls",
+        "priority": "Medium",
+        "description": "Network security systems that monitor and control incoming and outgoing network traffic.",
+        "depends_on": []
+      }
+    ],
+    "tools": [
+      {
+        "skill": "Wireshark",
+        "priority": "Medium",
+        "description": "Network protocol analyzer used for network troubleshooting and analysis.",
+        "depends_on": []
+      },
+      {
+        "skill": "Kali Linux",
+        "priority": "Medium",
+        "description": "Linux distribution for penetration testing and security auditing.",
+        "depends_on": []
+      }
+    ]
+  },
+  "qa_test_automation_engineer": {
+    "skills": [
+      {
+        "skill": "Selenium",
+        "priority": "High",
+        "description": "Framework for automating web browsers to test web applications.",
+        "depends_on": []
+      },
+      {
+        "skill": "JUnit",
+        "priority": "High",
+        "description": "Testing framework for Java, used to write and run repeatable tests.",
+        "depends_on": []
+      },
+      {
+        "skill": "TestNG",
+        "priority": "Medium",
+        "description": "Testing framework inspired by JUnit, designed for test configuration and parallel test execution.",
+        "depends_on": []
+      }
+    ],
+    "tools": [
+      {
+        "skill": "Postman",
+        "priority": "Medium",
+        "description": "Tool for API testing.",
+        "depends_on": []
+      },
+      {
+        "skill": "Cucumber",
+        "priority": "Medium",
+        "description": "Behavior-driven development (BDD) testing framework.",
+        "depends_on": []
+      }
+    ]
+  },
+  "game_development_engineer": {
+    "skills": [
+      {
+        "skill": "C#",
+        "priority": "High",
+        "description": "Programming language often used for game development in Unity.",
+        "depends_on": []
+      },
+      {
+        "skill": "Unity",
+        "priority": "High",
+        "description": "Cross-platform game engine used for developing 2D and 3D games.",
+        "depends_on": []
+      },
+      {
+        "skill": "Unreal Engine",
+        "priority": "Medium",
+        "description": "Game engine developed by Epic Games, used for building high-quality games.",
+        "depends_on": []
+      }
+    ],
+    "tools": [
+      {
+        "skill": "Blender",
+        "priority": "Medium",
+        "description": "Open-source 3D modeling, animation, and rendering software.",
+        "depends_on": []
+      },
+      {
+        "skill": "Git",
+        "priority": "Medium",
+        "description": "Version control system used to manage game project files.",
+        "depends_on": []
+      }
+    ]
+  },
+  "embedded_iot_engineer": {
+    "skills": [
+      {
+        "skill": "C/C++",
+        "priority": "High",
+        "description": "Low-level programming languages commonly used in embedded systems.",
+        "depends_on": []
+      },
+      {
+        "skill": "Raspberry Pi",
+        "priority": "High",
+        "description": "Small single-board computer often used for IoT and embedded projects.",
+        "depends_on": []
+      },
+      {
+        "skill": "Arduino",
+        "priority": "High",
+        "description": "Open-source electronics platform used for building embedded systems and IoT devices.",
+        "depends_on": []
+      }
+    ],
+    "tools": [
+      {
+        "skill": "Visual Studio Code",
+        "priority": "Medium",
+        "description": "Code editor often used for embedded software development.",
+        "depends_on": []
+      },
+      {
+        "skill": "PlatformIO",
+        "priority": "Medium",
+        "description": "Cross-platform development environment for embedded systems.",
+        "depends_on": []
+      }
+    ]
+  },
+  "ar_vr_xr_engineer": {
+    "skills": [
+      {
+        "skill": "Unity",
+        "priority": "High",
+        "description": "Cross-platform game engine used for AR/VR development.",
+        "depends_on": []
+      },
+      {
+        "skill": "Unreal Engine",
+        "priority": "High",
+        "description": "Game engine used for developing high-quality VR/AR experiences.",
+        "depends_on": []
+      },
+      {
+        "skill": "ARKit",
+        "priority": "Medium",
+        "description": "Apple's framework for building augmented reality experiences on iOS devices.",
+        "depends_on": []
+      },
+      {
+        "skill": "ARCore",
+        "priority": "Medium",
+        "description": "Google's platform for building augmented reality apps for Android.",
+        "depends_on": []
+      }
+    ],
+    "tools": [
+      {
+        "skill": "Oculus SDK",
+        "priority": "Medium",
+        "description": "Software development kit for building applications for Oculus VR headsets.",
+        "depends_on": []
+      },
+      {
+        "skill": "Vuforia",
+        "priority": "Medium",
+        "description": "Augmented reality SDK used to create AR experiences for mobile devices.",
+        "depends_on": []
+      }
+    ]
+  },
+  "database_admin_engineer": {
+    "skills": [
+      {
+        "skill": "SQL",
+        "priority": "High",
+        "description": "Structured Query Language for managing and querying relational databases.",
+        "depends_on": []
+      },
+      {
+        "skill": "PostgreSQL",
+        "priority": "High",
+        "description": "Advanced open-source relational database system.",
+        "depends_on": []
+      },
+      {
+        "skill": "MySQL",
+        "priority": "High",
+        "description": "Widely-used relational database management system.",
+        "depends_on": []
+      },
+      {
+        "skill": "Oracle Database",
+        "priority": "Medium",
+        "description": "Comprehensive database management system provided by Oracle.",
+        "depends_on": []
+      }
+    ],
+    "tools_and_frameworks": [
+      {
+        "skill": "MongoDB",
+        "priority": "Medium",
+          "description": "NoSQL database used for handling large-scale unstructured data.",
+          "depends_on": []
         },
-        {
-          "skill": "React",
-          "priority": "High",
-          "description": "A JavaScript library for building user interfaces, especially for single-page applications."
-        },
-        {
-          "skill": "HTML5",
-          "priority": "High",
-          "description": "Markup language for structuring web content."
-        },
-        {
-          "skill": "CSS3",
-          "priority": "High",
-          "description": "Styling language for web pages, including layout, colors, and fonts."
-        },
-        {
-          "skill": "Vue.js",
-          "priority": "Medium",
-          "description": "Progressive JavaScript framework for building user interfaces."
-        },
-        {
-          "skill": "SASS/SCSS",
-          "priority": "Medium",
-          "description": "CSS preprocessor that adds features like variables and mixins."
-        }
-      ],
-      "devtools": [
-        {
-          "skill": "Git",
-          "priority": "High",
-          "description": "Version control system for tracking changes in code."
-        },
-        {
-          "skill": "Webpack",
-          "priority": "Medium",
-          "description": "Module bundler for JavaScript applications."
-        },
-        {
-          "skill": "Babel",
-          "priority": "Medium",
-          "description": "JavaScript compiler that allows you to use the latest JavaScript syntax."
-        }
-      ]
-    },
-    "backend_engineer": {
-      "backend_skills": [
-        {
-          "skill": "Node.js",
-          "priority": "High",
-          "description": "JavaScript runtime for server-side development."
-        },
-        {
-          "skill": "Express.js",
-          "priority": "High",
-          "description": "Minimalist web framework for Node.js used to build RESTful APIs."
-        },
-        {
-          "skill": "Ruby on Rails",
-          "priority": "Medium",
-          "description": "Web application framework written in Ruby."
-        },
-        {
-          "skill": "Python",
-          "priority": "Medium",
-          "description": "General-purpose programming language, often used for backend development."
-        }
-      ],
-      "database_skills": [
-        {
-          "skill": "MongoDB",
-          "priority": "High",
-          "description": "NoSQL database for storing unstructured data."
-        },
-        {
-          "skill": "PostgreSQL",
-          "priority": "High",
-          "description": "Relational database system with SQL compliance."
-        },
-        {
-          "skill": "MySQL",
-          "priority": "Medium",
-          "description": "Widely-used relational database management system."
-        }
-      ]
-    },
-      "full_stack_engineer": {
-      "frontend_skills": [
-        {
-          "skill": "JavaScript",
-          "priority": "High",
-          "description": "Core programming language for web development, used for building interactive frontends."
-        },
-        {
-          "skill": "React",
-          "priority": "High",
-          "description": "A JavaScript library for building user interfaces, especially for single-page applications."
-        },
-        {
-          "skill": "HTML5",
-          "priority": "High",
-          "description": "Markup language for structuring web content."
-        },
-        {
-          "skill": "CSS3",
-          "priority": "High",
-          "description": "Styling language for web pages, including layout, colors, and fonts."
-        },
-        {
-          "skill": "Vue.js",
-          "priority": "Medium",
-          "description": "Progressive JavaScript framework for building user interfaces."
-        },
-        {
-          "skill": "SASS/SCSS",
-          "priority": "Medium",
-          "description": "CSS preprocessor that adds features like variables and mixins."
-        }
-      ],
-      "backend_skills": [
-        {
-          "skill": "Node.js",
-          "priority": "High",
-          "description": "JavaScript runtime for server-side development."
-        },
-        {
-          "skill": "Express.js",
-          "priority": "High",
-          "description": "Minimalist web framework for Node.js used to build RESTful APIs."
-        },
-        {
-          "skill": "Ruby on Rails",
-          "priority": "Medium",
-          "description": "Web application framework written in Ruby."
-        },
-        {
-          "skill": "Python",
-          "priority": "Medium",
-          "description": "General-purpose programming language, often used for backend development."
-        }
-      ],
-      "database_skills": [
-        {
-          "skill": "MongoDB",
-          "priority": "High",
-          "description": "NoSQL database for storing unstructured data."
-        },
-        {
-          "skill": "PostgreSQL",
-          "priority": "High",
-          "description": "Relational database system with SQL compliance."
-        },
-        {
-          "skill": "MySQL",
-          "priority": "Medium",
-          "description": "Widely-used relational database management system."
-        }
-      ],
-      "devtools": [
-        {
-          "skill": "Git",
-          "priority": "High",
-          "description": "Version control system for tracking changes in code."
-        },
-        {
-          "skill": "Webpack",
-          "priority": "Medium",
-          "description": "Module bundler for JavaScript applications."
-        },
-        {
-          "skill": "Babel",
-          "priority": "Medium",
-          "description": "JavaScript compiler that allows you to use the latest JavaScript syntax."
-        }
-      ]
-    },
-
-    "mobile_engineer": {
-      "frontend_skills": [
-        {
-          "skill": "JavaScript",
-          "priority": "High",
-          "description": "Core programming language for web development, used for building interactive frontends."
-        },
-        {
-          "skill": "React Native",
-          "priority": "High",
-          "description": "Framework for building mobile applications using JavaScript and React."
-        },
-        {
-          "skill": "Swift",
-          "priority": "High",
-          "description": "Programming language for iOS development."
-        },
-        {
-          "skill": "Kotlin",
-          "priority": "High",
-          "description": "Programming language for Android development."
-        }
-      ],
-      "devtools": [
-        {
-          "skill": "Xcode",
-          "priority": "High",
-          "description": "Integrated development environment (IDE) for macOS to develop iOS applications."
-        },
-        {
-          "skill": "Android Studio",
-          "priority": "High",
-          "description": "Official IDE for Android development."
-        }
-      ]
-    },
-    "cloud_devops_engineer": {
-      "cloud_skills": [
-        {
-          "skill": "AWS",
-          "priority": "High",
-          "description": "Cloud computing platform offering computing power, storage, and other cloud services."
-        },
-        {
-          "skill": "Azure",
-          "priority": "High",
-          "description": "Cloud computing platform provided by Microsoft for building and managing applications."
-        },
-        {
-          "skill": "Google Cloud",
-          "priority": "Medium",
-          "description": "Cloud computing services offered by Google."
-        }
-      ],
-      "devops_tools": [
         {
           "skill": "Docker",
-          "priority": "High",
-          "description": "Platform for building, deploying, and running applications in containers."
-        },
-        {
-          "skill": "Kubernetes",
-          "priority": "High",
-          "description": "System for automating the deployment, scaling, and management of containerized applications."
-        },
-        {
-          "skill": "Jenkins",
           "priority": "Medium",
-          "description": "Open-source automation server used for continuous integration and continuous delivery."
-        }
-      ]
-    },
-    "data_engineering_engineer": {
-      "data_skills": [
-        {
-          "skill": "Python",
-          "priority": "High",
-          "description": "General-purpose programming language, often used for data processing and manipulation."
-        },
-        {
-          "skill": "SQL",
-          "priority": "High",
-          "description": "Structured Query Language used to manage and query relational databases."
-        },
-        {
-          "skill": "Apache Hadoop",
-          "priority": "Medium",
-          "description": "Open-source framework for storing and processing large datasets in a distributed computing environment."
-        },
-        {
-          "skill": "Apache Spark",
-          "priority": "Medium",
-          "description": "Unified analytics engine for big data processing, with built-in modules for streaming, SQL, and machine learning."
-        }
-      ],
-      "tools_and_frameworks": [
-        {
-          "skill": "Airflow",
-          "priority": "Medium",
-          "description": "Open-source platform for scheduling and monitoring workflows."
-        },
-        {
-          "skill": "Kafka",
-          "priority": "Medium",
-          "description": "Distributed streaming platform for building real-time data pipelines."
-        }
-      ]
-    },
-    "ml_ai_engineer": {
-      "ml_skills": [
-        {
-          "skill": "Python",
-          "priority": "High",
-          "description": "Programming language frequently used for machine learning and data science."
-        },
-        {
-          "skill": "TensorFlow",
-          "priority": "High",
-          "description": "Open-source framework for machine learning and deep learning."
-        },
-        {
-          "skill": "PyTorch",
-          "priority": "High",
-          "description": "Deep learning framework for building and training neural networks."
-        },
-        {
-          "skill": "Scikit-learn",
-          "priority": "Medium",
-          "description": "Machine learning library for Python for data mining and data analysis."
-        }
-      ],
-      "tools_and_frameworks": [
-        {
-          "skill": "Jupyter",
-          "priority": "Medium",
-          "description": "Open-source web application for creating and sharing documents containing live code, equations, and visualizations."
-        },
-        {
-          "skill": "Keras",
-          "priority": "Medium",
-          "description": "High-level neural networks API, written in Python, capable of running on top of TensorFlow."
-        }
-      ]
-    },
-    "cybersecurity_engineer": {
-      "skills": [
-        {
-          "skill": "Network Security",
-          "priority": "High",
-          "description": "Protection of networks from unauthorized access, misuse, and attacks."
-        },
-        {
-          "skill": "Penetration Testing",
-          "priority": "High",
-          "description": "Simulated attacks on systems to evaluate their security."
-        },
-        {
-          "skill": "Cryptography",
-          "priority": "Medium",
-          "description": "Practice of securing communication and information through codes."
-        },
-        {
-          "skill": "Firewalls",
-          "priority": "Medium",
-          "description": "Network security systems that monitor and control incoming and outgoing network traffic."
-        }
-      ],
-      "tools": [
-        {
-          "skill": "Wireshark",
-          "priority": "Medium",
-          "description": "Network protocol analyzer used for network troubleshooting and analysis."
-        },
-        {
-          "skill": "Kali Linux",
-          "priority": "Medium",
-          "description": "Linux distribution for penetration testing and security auditing."
-        }
-      ]
-    },
-    "qa_test_automation_engineer": {
-      "skills": [
-        {
-          "skill": "Selenium",
-          "priority": "High",
-          "description": "Framework for automating web browsers to test web applications."
-        },
-        {
-          "skill": "JUnit",
-          "priority": "High",
-          "description": "Testing framework for Java, used to write and run repeatable tests."
-        },
-        {
-          "skill": "TestNG",
-          "priority": "Medium",
-          "description": "Testing framework inspired by JUnit, designed for test configuration and parallel test execution."
-        }
-      ],
-      "tools": [
-        {
-          "skill": "Postman",
-          "priority": "Medium",
-          "description": "Tool for API testing."
-        },
-        {
-          "skill": "Cucumber",
-          "priority": "Medium",
-          "description": "Behavior-driven development (BDD) testing framework."
-        }
-      ]
-    },
-    "game_development_engineer": {
-      "skills": [
-        {
-          "skill": "C#",
-          "priority": "High",
-          "description": "Programming language often used for game development in Unity."
-        },
-        {
-          "skill": "Unity",
-          "priority": "High",
-          "description": "Cross-platform game engine used for developing 2D and 3D games."
-        },
-        {
-          "skill": "Unreal Engine",
-          "priority": "Medium",
-          "description": "Game engine developed by Epic Games, used for building high-quality games."
-        }
-      ],
-      "tools": [
-        {
-          "skill": "Blender",
-          "priority": "Medium",
-          "description": "Open-source 3D modeling, animation, and rendering software."
-        },
-        {
-          "skill": "Git",
-          "priority": "Medium",
-          "description": "Version control system used to manage game project files."
-        }
-      ]
-    },
-    "embedded_iot_engineer": {
-      "skills": [
-        {
-          "skill": "C/C++",
-          "priority": "High",
-          "description": "Low-level programming languages commonly used in embedded systems."
-        },
-        {
-          "skill": "Raspberry Pi",
-          "priority": "High",
-          "description": "Small single-board computer often used for IoT and embedded projects."
-        },
-        {
-          "skill": "Arduino",
-          "priority": "High",
-          "description": "Open-source electronics platform used for building embedded systems and IoT devices."
-        }
-      ],
-      "tools": [
-        {
-          "skill": "Visual Studio Code",
-          "priority": "Medium",
-          "description": "Code editor often used for embedded software development."
-        },
-        {
-          "skill": "PlatformIO",
-          "priority": "Medium",
-          "description": "Cross-platform development environment for embedded systems."
-        }
-      ]
-    },
-    "ar_vr_xr_engineer": {
-      "skills": [
-        {
-          "skill": "Unity",
-          "priority": "High",
-          "description": "Cross-platform game engine used for AR/VR development."
-        },
-        {
-          "skill": "Unreal Engine",
-          "priority": "High",
-          "description": "Game engine used for developing high-quality VR/AR experiences."
-        },
-        {
-          "skill": "ARKit",
-          "priority": "Medium",
-          "description": "Apple's framework for building augmented reality experiences on iOS devices."
-        },
-        {
-          "skill": "ARCore",
-          "priority": "Medium",
-          "description": "Google's platform for building augmented reality apps for Android."
-        }
-      ],
-      "tools": [
-        {
-          "skill": "Oculus SDK",
-          "priority": "Medium",
-          "description": "Software development kit for building applications for Oculus VR headsets."
-        },
-        {
-          "skill": "Vuforia",
-          "priority": "Medium",
-          "description": "Augmented reality SDK used to create AR experiences for mobile devices."
-        }
-      ]
-    },
-    "database_admin_engineer": {
-      "skills": [
-        {
-          "skill": "SQL",
-          "priority": "High",
-          "description": "Structured Query Language for managing and querying relational databases."
-        },
-        {
-          "skill": "PostgreSQL",
-          "priority": "High",
-          "description": "Advanced open-source relational database system."
-        },
-        {
-          "skill": "MySQL",
-          "priority": "High",
-          "description": "Widely-used relational database management system."
-        },
-        {
-          "skill": "Oracle Database",
-          "priority": "Medium",
-          "description": "Comprehensive database management system provided by Oracle."
-        }
-      ],
-      "tools_and_frameworks": [
-        {
-          "skill": "MongoDB",
-          "priority": "Medium",
-          "description": "NoSQL database used for handling large-scale unstructured data."
-        },
-        {
-          "skill": "Docker",
-          "priority": "Medium",
-          "description": "Platform for developing, shipping, and running applications inside containers."
+          "description": "Platform for developing, shipping, and running applications inside containers.",
+          "depends_on": []
         }
       ]
     }
   }
-  
