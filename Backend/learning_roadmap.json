@@ -1,0 +1,1223 @@
+{
+  "meta": {
+    "target_role": "frontend_engineer",
+    "duration_weeks": 12,
+    "weekly_hours_target": 8,
+    "generated_at": "2025-01-01T00:00:00Z"
+  },
+  "roadmap": {
+    "weeks": [
+      {
+        "week_index": 1,
+        "theme": "Core Frontend Foundations",
+        "skills_focus": [
+          "HTML5",
+          "CSS3",
+          "JavaScript"
+        ],
+        "time_budget_hours": 8,
+        "weekly_outcomes": [
+          "Understand advanced HTML5 semantic elements and accessibility",
+          "Apply advanced CSS3 layouts and responsive design",
+          "Enhance JavaScript fundamentals and ES6+ features"
+        ],
+        "weekly_assessment": {
+          "type": "quiz",
+          "instructions": "Complete a quiz covering HTML5 semantics, CSS3 layouts, and ES6 JavaScript features",
+          "est_time_hours": 1.0
+        },
+        "daily_tasks": [
+          {
+            "day_index": 1,
+            "tasks": [
+              {
+                "id": "W1D1-T1",
+                "skill": "HTML5",
+                "activity_type": "reading",
+                "description": "Study HTML5 semantic elements and ARIA roles",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Summarize key semantic tags",
+                  "List ARIA role examples"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 2,
+            "tasks": [
+              {
+                "id": "W1D2-T1",
+                "skill": "CSS3",
+                "activity_type": "video",
+                "description": "Watch responsive design and Flexbox/CSS Grid tutorials",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Explain Flexbox vs Grid",
+                  "Identify responsive techniques"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 3,
+            "tasks": [
+              {
+                "id": "W1D3-T1",
+                "skill": "JavaScript",
+                "activity_type": "practice",
+                "description": "Practice ES6+ features: let/const, arrow functions, template literals",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Write sample code using ES6 features",
+                  "Pass code style checks"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 4,
+            "tasks": [
+              {
+                "id": "W1D4-T1",
+                "skill": "CSS3",
+                "activity_type": "practice",
+                "description": "Build a responsive layout using Flexbox and Grid",
+                "est_time_minutes": 120,
+                "acceptance_criteria": [
+                  "Layout matches design",
+                  "Responsive across devices"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 5,
+            "tasks": [
+              {
+                "id": "W1D5-T1",
+                "skill": "HTML5",
+                "activity_type": "practice",
+                "description": "Create an accessible HTML5 form using semantic elements and ARIA",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Form uses correct elements",
+                  "Accessibility audit passes"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "week_index": 2,
+        "theme": "Core Frontend Foundations",
+        "skills_focus": [
+          "HTML5",
+          "CSS3",
+          "JavaScript"
+        ],
+        "time_budget_hours": 8,
+        "weekly_outcomes": [
+          "Deepen JavaScript knowledge with DOM manipulation and events",
+          "Master CSS3 animations and transitions",
+          "Implement advanced HTML5 APIs"
+        ],
+        "weekly_assessment": {
+          "type": "project",
+          "instructions": "Build an interactive webpage using HTML5 APIs, CSS3 animations, and JavaScript event handling",
+          "est_time_hours": 2.0
+        },
+        "daily_tasks": [
+          {
+            "day_index": 1,
+            "tasks": [
+              {
+                "id": "W2D1-T1",
+                "skill": "JavaScript",
+                "activity_type": "reading",
+                "description": "Read about DOM traversal, event listeners, and event delegation",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "List DOM methods",
+                  "Explain event bubbling and delegation"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 2,
+            "tasks": [
+              {
+                "id": "W2D2-T1",
+                "skill": "CSS3",
+                "activity_type": "practice",
+                "description": "Create CSS3 animations and transitions on page elements",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Animations run smoothly",
+                  "Transitions trigger on user actions"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 3,
+            "tasks": [
+              {
+                "id": "W2D3-T1",
+                "skill": "HTML5",
+                "activity_type": "reading",
+                "description": "Study HTML5 APIs: Geolocation, LocalStorage, and Canvas basics",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Describe API use cases",
+                  "List method signatures"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 4,
+            "tasks": [
+              {
+                "id": "W2D4-T1",
+                "skill": "JavaScript",
+                "activity_type": "practice",
+                "description": "Implement event delegation and DOM manipulation to create interactive elements",
+                "est_time_minutes": 120,
+                "acceptance_criteria": [
+                  "Elements respond to events",
+                  "Code is modular and clean"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 5,
+            "tasks": [
+              {
+                "id": "W2D5-T1",
+                "skill": "HTML5",
+                "activity_type": "practice",
+                "description": "Build a simple canvas drawing app using HTML5 Canvas API",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Drawing works with mouse",
+                  "Canvas clears on command"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "week_index": 3,
+        "theme": "Advanced React and Ecosystem",
+        "skills_focus": [
+          "React"
+        ],
+        "time_budget_hours": 8,
+        "weekly_outcomes": [
+          "Understand React hooks and state management",
+          "Build reusable components and manage lifecycle",
+          "Integrate React with APIs"
+        ],
+        "weekly_assessment": {
+          "type": "project",
+          "instructions": "Create a React app with hooks, state management, and API integration",
+          "est_time_hours": 3.0
+        },
+        "daily_tasks": [
+          {
+            "day_index": 1,
+            "tasks": [
+              {
+                "id": "W3D1-T1",
+                "skill": "React",
+                "activity_type": "video",
+                "description": "Watch tutorials on React hooks (useState, useEffect)",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Explain hooks usage",
+                  "Identify hook benefits"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 2,
+            "tasks": [
+              {
+                "id": "W3D2-T1",
+                "skill": "React",
+                "activity_type": "practice",
+                "description": "Build functional components using hooks for state and effects",
+                "est_time_minutes": 120,
+                "acceptance_criteria": [
+                  "Components update state correctly",
+                  "Effect triggers as expected"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 3,
+            "tasks": [
+              {
+                "id": "W3D3-T1",
+                "skill": "React",
+                "activity_type": "reading",
+                "description": "Read about React component lifecycle and best practices",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "List lifecycle phases",
+                  "Explain component optimization"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 4,
+            "tasks": [
+              {
+                "id": "W3D4-T1",
+                "skill": "React",
+                "activity_type": "practice",
+                "description": "Fetch and display data from an API within React components",
+                "est_time_minutes": 120,
+                "acceptance_criteria": [
+                  "Data loads on component mount",
+                  "Handles loading and error states"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 5,
+            "tasks": [
+              {
+                "id": "W3D5-T1",
+                "skill": "React",
+                "activity_type": "challenge",
+                "description": "Refactor a class component to hooks-based functional component",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Functionality preserved",
+                  "Code is idiomatic"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "week_index": 4,
+        "theme": "Version Control Mastery",
+        "skills_focus": [
+          "Git"
+        ],
+        "time_budget_hours": 8,
+        "weekly_outcomes": [
+          "Master Git commands and workflows",
+          "Manage branches and resolve conflicts",
+          "Use GitHub for collaboration"
+        ],
+        "weekly_assessment": {
+          "type": "challenge",
+          "instructions": "Perform a Git branching and merge challenge resolving conflicts",
+          "est_time_hours": 2.0
+        },
+        "daily_tasks": [
+          {
+            "day_index": 1,
+            "tasks": [
+              {
+                "id": "W4D1-T1",
+                "skill": "Git",
+                "activity_type": "reading",
+                "description": "Study Git basics: init, clone, add, commit, status",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Explain basic commands",
+                  "Complete simple repo setup"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 2,
+            "tasks": [
+              {
+                "id": "W4D2-T1",
+                "skill": "Git",
+                "activity_type": "practice",
+                "description": "Practice branching, checking out branches, and merging",
+                "est_time_minutes": 120,
+                "acceptance_criteria": [
+                  "Create and switch branches",
+                  "Merge without conflicts"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 3,
+            "tasks": [
+              {
+                "id": "W4D3-T1",
+                "skill": "Git",
+                "activity_type": "reading",
+                "description": "Learn about resolving conflicts and rebasing",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Describe conflict resolution",
+                  "Explain rebase use cases"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 4,
+            "tasks": [
+              {
+                "id": "W4D4-T1",
+                "skill": "Git",
+                "activity_type": "practice",
+                "description": "Simulate conflicts and practice resolving them",
+                "est_time_minutes": 120,
+                "acceptance_criteria": [
+                  "Conflicts resolved cleanly",
+                  "History is linear if rebased"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 5,
+            "tasks": [
+              {
+                "id": "W4D5-T1",
+                "skill": "Git",
+                "activity_type": "video",
+                "description": "Watch GitHub collaboration workflows: pull requests, reviews",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Explain PR process",
+                  "List review best practices"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "week_index": 5,
+        "theme": "Version Control Mastery",
+        "skills_focus": [
+          "Git"
+        ],
+        "time_budget_hours": 8,
+        "weekly_outcomes": [
+          "Use advanced Git features and GitHub integrations",
+          "Automate workflows with Git",
+          "Contribute to open source projects"
+        ],
+        "weekly_assessment": {
+          "type": "project",
+          "instructions": "Contribute a feature or fix to an open source GitHub project",
+          "est_time_hours": 3.0
+        },
+        "daily_tasks": [
+          {
+            "day_index": 1,
+            "tasks": [
+              {
+                "id": "W5D1-T1",
+                "skill": "Git",
+                "activity_type": "reading",
+                "description": "Explore advanced Git: stash, tags, hooks",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Explain stash usage",
+                  "List common hooks"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 2,
+            "tasks": [
+              {
+                "id": "W5D2-T1",
+                "skill": "Git",
+                "activity_type": "practice",
+                "description": "Practice using stash and tags in Git workflow",
+                "est_time_minutes": 120,
+                "acceptance_criteria": [
+                  "Successfully stash and apply changes",
+                  "Create and push tags"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 3,
+            "tasks": [
+              {
+                "id": "W5D3-T1",
+                "skill": "Git",
+                "activity_type": "research",
+                "description": "Research GitHub Actions for automation",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Outline workflow setup",
+                  "Identify use cases"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 4,
+            "tasks": [
+              {
+                "id": "W5D4-T1",
+                "skill": "Git",
+                "activity_type": "practice",
+                "description": "Set up a simple GitHub Actions workflow for CI",
+                "est_time_minutes": 120,
+                "acceptance_criteria": [
+                  "Workflow runs successfully",
+                  "Automates tests or builds"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 5,
+            "tasks": [
+              {
+                "id": "W5D5-T1",
+                "skill": "Git",
+                "activity_type": "challenge",
+                "description": "Fork and submit a pull request to an open source project",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "PR accepted or feedback received",
+                  "Follow contribution guidelines"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "week_index": 6,
+        "theme": "CSS Preprocessing and Frameworks",
+        "skills_focus": [
+          "SASS/SCSS",
+          "Vue.js"
+        ],
+        "time_budget_hours": 8,
+        "weekly_outcomes": [
+          "Understand SASS/SCSS syntax and features",
+          "Build stylesheets using variables, mixins, and nesting",
+          "Get introduced to Vue.js fundamentals"
+        ],
+        "weekly_assessment": {
+          "type": "quiz",
+          "instructions": "Complete a quiz on SASS/SCSS features and Vue.js basics",
+          "est_time_hours": 1.0
+        },
+        "daily_tasks": [
+          {
+            "day_index": 1,
+            "tasks": [
+              {
+                "id": "W6D1-T1",
+                "skill": "SASS/SCSS",
+                "activity_type": "reading",
+                "description": "Learn SCSS syntax, variables, and nesting",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Write SCSS snippets",
+                  "Explain variable scope"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 2,
+            "tasks": [
+              {
+                "id": "W6D2-T1",
+                "skill": "SASS/SCSS",
+                "activity_type": "practice",
+                "description": "Create stylesheets using mixins, functions, and extends",
+                "est_time_minutes": 120,
+                "acceptance_criteria": [
+                  "Styles compile without errors",
+                  "Use mixins effectively"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 3,
+            "tasks": [
+              {
+                "id": "W6D3-T1",
+                "skill": "Vue.js",
+                "activity_type": "video",
+                "description": "Watch introduction to Vue.js framework and its core concepts",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Identify Vue instance features",
+                  "Understand template syntax"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 4,
+            "tasks": [
+              {
+                "id": "W6D4-T1",
+                "skill": "Vue.js",
+                "activity_type": "practice",
+                "description": "Create a simple Vue component with data binding and events",
+                "est_time_minutes": 120,
+                "acceptance_criteria": [
+                  "Component reacts to user input",
+                  "Data binding works correctly"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 5,
+            "tasks": [
+              {
+                "id": "W6D5-T1",
+                "skill": "SASS/SCSS",
+                "activity_type": "practice",
+                "description": "Convert existing CSS styles to SCSS with nesting and partials",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "SCSS compiles successfully",
+                  "Code is modularized"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "week_index": 7,
+        "theme": "CSS Preprocessing and Frameworks",
+        "skills_focus": [
+          "SASS/SCSS",
+          "Vue.js"
+        ],
+        "time_budget_hours": 8,
+        "weekly_outcomes": [
+          "Build Vue.js applications with components and lifecycle hooks",
+          "Use SASS for theming and responsive design",
+          "Integrate Vue.js with SASS styles"
+        ],
+        "weekly_assessment": {
+          "type": "project",
+          "instructions": "Develop a Vue.js SPA styled with SASS including components and reactive data",
+          "est_time_hours": 3.0
+        },
+        "daily_tasks": [
+          {
+            "day_index": 1,
+            "tasks": [
+              {
+                "id": "W7D1-T1",
+                "skill": "Vue.js",
+                "activity_type": "reading",
+                "description": "Study Vue lifecycle hooks and component communication",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "List lifecycle methods",
+                  "Explain props and events"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 2,
+            "tasks": [
+              {
+                "id": "W7D2-T1",
+                "skill": "Vue.js",
+                "activity_type": "practice",
+                "description": "Build nested Vue components passing data via props",
+                "est_time_minutes": 120,
+                "acceptance_criteria": [
+                  "Data flows correctly",
+                  "Components re-render on updates"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 3,
+            "tasks": [
+              {
+                "id": "W7D3-T1",
+                "skill": "SASS/SCSS",
+                "activity_type": "practice",
+                "description": "Create SASS themes with variables and media queries for responsiveness",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Themes switchable",
+                  "Responsive styles apply correctly"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 4,
+            "tasks": [
+              {
+                "id": "W7D4-T1",
+                "skill": "Vue.js",
+                "activity_type": "practice",
+                "description": "Implement Vue lifecycle hooks to manage component state",
+                "est_time_minutes": 120,
+                "acceptance_criteria": [
+                  "Hooks used appropriately",
+                  "State updates tracked"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 5,
+            "tasks": [
+              {
+                "id": "W7D5-T1",
+                "skill": "SASS/SCSS",
+                "activity_type": "challenge",
+                "description": "Refactor CSS framework styles to SCSS partials and mixins",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Code is DRY",
+                  "Styles compile without errors"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "week_index": 8,
+        "theme": "Modern Build Tools",
+        "skills_focus": [
+          "Webpack",
+          "Babel"
+        ],
+        "time_budget_hours": 8,
+        "weekly_outcomes": [
+          "Understand Webpack configuration and module bundling",
+          "Use Babel for transpilation and polyfills",
+          "Optimize build process for frontend projects"
+        ],
+        "weekly_assessment": {
+          "type": "quiz",
+          "instructions": "Take a quiz covering Webpack concepts, loaders, plugins, and Babel usage",
+          "est_time_hours": 1.0
+        },
+        "daily_tasks": [
+          {
+            "day_index": 1,
+            "tasks": [
+              {
+                "id": "W8D1-T1",
+                "skill": "Webpack",
+                "activity_type": "reading",
+                "description": "Read Webpack core concepts and configuration basics",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Explain entry, output, mode",
+                  "Describe loaders and plugins"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 2,
+            "tasks": [
+              {
+                "id": "W8D2-T1",
+                "skill": "Babel",
+                "activity_type": "reading",
+                "description": "Study Babel configuration and presets for ES6+ transpiling",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "List common presets",
+                  "Explain Babel plugin roles"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 3,
+            "tasks": [
+              {
+                "id": "W8D3-T1",
+                "skill": "Webpack",
+                "activity_type": "practice",
+                "description": "Create a custom Webpack config bundling JS and CSS assets",
+                "est_time_minutes": 120,
+                "acceptance_criteria": [
+                  "Assets bundled correctly",
+                  "Config is modular"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 4,
+            "tasks": [
+              {
+                "id": "W8D4-T1",
+                "skill": "Babel",
+                "activity_type": "practice",
+                "description": "Transpile modern JS using Babel with polyfill support",
+                "est_time_minutes": 120,
+                "acceptance_criteria": [
+                  "Code runs in older browsers",
+                  "No transpilation errors"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 5,
+            "tasks": [
+              {
+                "id": "W8D5-T1",
+                "skill": "Webpack",
+                "activity_type": "video",
+                "description": "Watch tutorials on Webpack optimization and caching",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "List optimization techniques",
+                  "Explain caching benefits"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "week_index": 9,
+        "theme": "Modern Build Tools",
+        "skills_focus": [
+          "Webpack",
+          "Babel"
+        ],
+        "time_budget_hours": 8,
+        "weekly_outcomes": [
+          "Implement advanced Webpack features like code splitting",
+          "Configure Babel for environment targeting",
+          "Integrate Webpack and Babel in full build pipeline"
+        ],
+        "weekly_assessment": {
+          "type": "project",
+          "instructions": "Configure a Webpack and Babel pipeline with code splitting and environment support",
+          "est_time_hours": 3.0
+        },
+        "daily_tasks": [
+          {
+            "day_index": 1,
+            "tasks": [
+              {
+                "id": "W9D1-T1",
+                "skill": "Webpack",
+                "activity_type": "reading",
+                "description": "Study Webpack code splitting and dynamic imports",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Explain code splitting types",
+                  "List use cases"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 2,
+            "tasks": [
+              {
+                "id": "W9D2-T1",
+                "skill": "Babel",
+                "activity_type": "practice",
+                "description": "Configure Babel to target different browser environments",
+                "est_time_minutes": 120,
+                "acceptance_criteria": [
+                  "Builds target specified browsers",
+                  "No runtime errors"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 3,
+            "tasks": [
+              {
+                "id": "W9D3-T1",
+                "skill": "Webpack",
+                "activity_type": "practice",
+                "description": "Implement dynamic imports for lazy loading modules",
+                "est_time_minutes": 120,
+                "acceptance_criteria": [
+                  "Modules load on demand",
+                  "Performance improved"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 4,
+            "tasks": [
+              {
+                "id": "W9D4-T1",
+                "skill": "Webpack",
+                "activity_type": "challenge",
+                "description": "Optimize build with caching and minification",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Build size reduced",
+                  "Cache works across builds"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 5,
+            "tasks": [
+              {
+                "id": "W9D5-T1",
+                "skill": "Babel",
+                "activity_type": "reading",
+                "description": "Read about Babel plugins for code transformation and polyfills",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "List useful plugins",
+                  "Explain plugin usage"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "week_index": 10,
+        "theme": "Core Frontend Foundations",
+        "skills_focus": [
+          "JavaScript",
+          "HTML5",
+          "CSS3"
+        ],
+        "time_budget_hours": 8,
+        "weekly_outcomes": [
+          "Master asynchronous JavaScript and promises",
+          "Improve semantic HTML and SEO practices",
+          "Create complex CSS3 selectors and animations"
+        ],
+        "weekly_assessment": {
+          "type": "challenge",
+          "instructions": "Develop a dynamic webpage using async JS, semantic HTML, and advanced CSS3 animations",
+          "est_time_hours": 2.5
+        },
+        "daily_tasks": [
+          {
+            "day_index": 1,
+            "tasks": [
+              {
+                "id": "W10D1-T1",
+                "skill": "JavaScript",
+                "activity_type": "reading",
+                "description": "Study async/await, promises, and error handling",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Write async functions",
+                  "Handle promise rejections"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 2,
+            "tasks": [
+              {
+                "id": "W10D2-T1",
+                "skill": "HTML5",
+                "activity_type": "practice",
+                "description": "Improve webpage SEO using semantic HTML and meta tags",
+                "est_time_minutes": 120,
+                "acceptance_criteria": [
+                  "SEO best practices applied",
+                  "Page validated with no errors"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 3,
+            "tasks": [
+              {
+                "id": "W10D3-T1",
+                "skill": "CSS3",
+                "activity_type": "practice",
+                "description": "Create complex CSS selectors and keyframe animations",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Animations run smoothly",
+                  "Selectors target correct elements"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 4,
+            "tasks": [
+              {
+                "id": "W10D4-T1",
+                "skill": "JavaScript",
+                "activity_type": "practice",
+                "description": "Build an async data fetcher with error fallback",
+                "est_time_minutes": 120,
+                "acceptance_criteria": [
+                  "Data loads asynchronously",
+                  "Errors handled gracefully"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 5,
+            "tasks": [
+              {
+                "id": "W10D5-T1",
+                "skill": "HTML5",
+                "activity_type": "challenge",
+                "description": "Audit and refactor legacy HTML for accessibility and SEO",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Accessibility passes audit",
+                  "SEO tags correctly used"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "week_index": 11,
+        "theme": "Advanced React and Ecosystem",
+        "skills_focus": [
+          "React"
+        ],
+        "time_budget_hours": 8,
+        "weekly_outcomes": [
+          "Implement React context and advanced hooks",
+          "Perform testing with React Testing Library",
+          "Improve performance with memoization and lazy loading"
+        ],
+        "weekly_assessment": {
+          "type": "project",
+          "instructions": "Build a React app using context, hooks, and tests with performance optimizations",
+          "est_time_hours": 3.0
+        },
+        "daily_tasks": [
+          {
+            "day_index": 1,
+            "tasks": [
+              {
+                "id": "W11D1-T1",
+                "skill": "React",
+                "activity_type": "reading",
+                "description": "Learn React context API and useContext hook",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Implement context provider",
+                  "Consume context in components"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 2,
+            "tasks": [
+              {
+                "id": "W11D2-T1",
+                "skill": "React",
+                "activity_type": "practice",
+                "description": "Use useMemo and React.lazy for performance optimization",
+                "est_time_minutes": 120,
+                "acceptance_criteria": [
+                  "Components memoized",
+                  "Lazy loading implemented"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 3,
+            "tasks": [
+              {
+                "id": "W11D3-T1",
+                "skill": "React",
+                "activity_type": "video",
+                "description": "Watch tutorials on React Testing Library and unit testing",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Write basic tests",
+                  "Understand test best practices"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 4,
+            "tasks": [
+              {
+                "id": "W11D4-T1",
+                "skill": "React",
+                "activity_type": "practice",
+                "description": "Write tests for React components and hooks",
+                "est_time_minutes": 120,
+                "acceptance_criteria": [
+                  "Tests cover key functionality",
+                  "Tests pass reliably"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 5,
+            "tasks": [
+              {
+                "id": "W11D5-T1",
+                "skill": "React",
+                "activity_type": "challenge",
+                "description": "Optimize a React app for performance and test coverage",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "App performance improved",
+                  "Test coverage increased"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "week_index": 12,
+        "theme": "Modern Build Tools",
+        "skills_focus": [
+          "Webpack",
+          "Babel"
+        ],
+        "time_budget_hours": 8,
+        "weekly_outcomes": [
+          "Combine learned tools into a full production build",
+          "Deploy a frontend app with optimized build pipeline",
+          "Review and document build configurations"
+        ],
+        "weekly_assessment": {
+          "type": "project",
+          "instructions": "Build, optimize, and deploy a frontend app using Webpack and Babel with full documentation",
+          "est_time_hours": 4.0
+        },
+        "daily_tasks": [
+          {
+            "day_index": 1,
+            "tasks": [
+              {
+                "id": "W12D1-T1",
+                "skill": "Webpack",
+                "activity_type": "practice",
+                "description": "Set up production webpack config with minification and source maps",
+                "est_time_minutes": 120,
+                "acceptance_criteria": [
+                  "Build optimized",
+                  "Source maps generate correctly"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 2,
+            "tasks": [
+              {
+                "id": "W12D2-T1",
+                "skill": "Babel",
+                "activity_type": "practice",
+                "description": "Configure Babel presets for production and polyfills",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Build targets browsers",
+                  "Polyfills added"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 3,
+            "tasks": [
+              {
+                "id": "W12D3-T1",
+                "skill": "Webpack",
+                "activity_type": "practice",
+                "description": "Integrate Webpack build with React and SASS/SCSS pipeline",
+                "est_time_minutes": 120,
+                "acceptance_criteria": [
+                  "App builds and runs",
+                  "Styles applied correctly"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 4,
+            "tasks": [
+              {
+                "id": "W12D4-T1",
+                "skill": "Webpack",
+                "activity_type": "research",
+                "description": "Research deployment options and configure build for deployment",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "Deployment steps documented",
+                  "Build ready for hosting"
+                ]
+              }
+            ]
+          },
+          {
+            "day_index": 5,
+            "tasks": [
+              {
+                "id": "W12D5-T1",
+                "skill": "Webpack",
+                "activity_type": "project",
+                "description": "Deploy the app to a hosting platform and document build process",
+                "est_time_minutes": 90,
+                "acceptance_criteria": [
+                  "App accessible online",
+                  "Documentation complete"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
