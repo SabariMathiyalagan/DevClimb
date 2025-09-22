@@ -4,15 +4,16 @@ import {
   Text,
   TouchableOpacity,
   ScrollView,
-  Modal,
   Dimensions,
   StyleSheet,
   Animated,
   SafeAreaView,
+  ActivityIndicator,
 } from 'react-native';
-import Svg, { Path, Circle } from 'react-native-svg';
+import Svg, { Path } from 'react-native-svg';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { colors } from '@/constants/Colors';
+import { useRoadmapDB } from '@/hooks/useRoadmapDB';
 
 // TypeScript interfaces
 interface TaskData {
@@ -26,6 +27,7 @@ interface TaskData {
   reward: number;
   color: string;
   week: number;
+  completed: boolean;
 }
 
 interface PathConnection {
@@ -50,154 +52,124 @@ const IconMap = {
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 const CareerRoadmapMario: React.FC = () => {
-  const [completedTasks, setCompletedTasks] = useState<Set<number>>(new Set([1, 2]));
-  const [selectedTask, setSelectedTask] = useState<TaskData | null>(null);
+  const { 
+    userRoadmaps, 
+    currentRoadmapId, 
+    currentProgress,
+    loadUserRoadmaps, 
+    selectRoadmap,
+    markTaskComplete,
+    isLoadingRoadmaps 
+  } = useRoadmapDB();
+  
   const [expandedTask, setExpandedTask] = useState<number | null>(null);
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [roadmapWeeks, setRoadmapWeeks] = useState<any[]>([]);
+  const [completedWeeks, setCompletedWeeks] = useState<Set<number>>(new Set());
   const animatedValues = useRef<{ [key: number]: Animated.Value }>({}).current;
   const expandAnimations = useRef<{ [key: number]: Animated.Value }>({}).current;
   const scrollViewRef = useRef<ScrollView>(null);
 
-  // Vertical roadmap data with zigzag pattern
-  const roadmapData: TaskData[] = [
-    {
-      id: 1,
-      title: "React Basics",
-      description: "Master React fundamentals including components, JSX, props, and state management. Learn the core concepts that form the foundation of React development.",
-      position: { x: 20, y: 10 },
-      difficulty: "Beginner",
-      category: "Technical",
-      icon: "Code",
-      reward: 100,
-      color: colors.success,
-      week: 1
-    },
-    {
-      id: 2,
-      title: "State Management",
-      description: "Deep dive into Redux, Context API, and advanced state patterns. Learn how to manage complex application state effectively.",
-      position: { x: 80, y: 22 },
-      difficulty: "Intermediate",
-      category: "Technical",
-      icon: "Settings",
-      reward: 150,
-      color: colors.primary,
-      week: 2
-    },
-    {
-      id: 3,
-      title: "Build Portfolio",
-      description: "Create a stunning portfolio showcasing your skills and projects. Learn design principles and best practices for developer portfolios.",
-      position: { x: 20, y: 34 },
-      difficulty: "Intermediate",
-      category: "Projects",
-      icon: "Star",
-      reward: 200,
-      color: colors.warning,
-      week: 3
-    },
-    {
-      id: 4,
-      title: "Team Collaboration",
-      description: "Master Git workflows, code reviews, and team collaboration tools. Learn how to work effectively in development teams.",
-      position: { x: 80, y: 46 },
-      difficulty: "Intermediate",
-      category: "Soft Skills",
-      icon: "Users",
-      reward: 120,
-      color: colors.accent,
-      week: 4
-    },
-    {
-      id: 5,
-      title: "Advanced Patterns",
-      description: "Learn Higher-Order Components, Render Props, Custom Hooks, and performance optimization techniques for React applications.",
-      position: { x: 20, y: 58 },
-      difficulty: "Advanced",
-      category: "Technical",
-      icon: "Code",
-      reward: 250,
-      color: colors.error,
-      week: 6
-    },
-    {
-      id: 6,
-      title: "Full Stack Project",
-      description: "Build a complete full-stack application with backend integration, databases, and deployment. Showcase end-to-end development skills.",
-      position: { x: 80, y: 70 },
-      difficulty: "Advanced",
-      category: "Projects",
-      icon: "Target",
-      reward: 300,
-      color: colors.primary,
-      week: 8
-    },
-    {
-      id: 7,
-      title: "System Design",
-      description: "Learn scalable architecture patterns, microservices, caching strategies, and how to design systems for high availability.",
-      position: { x: 20, y: 82 },
-      difficulty: "Advanced",
-      category: "Architecture",
-      icon: "Settings",
-      reward: 280,
-      color: colors.warning,
-      week: 10
-    },
-    {
-      id: 8,
-      title: "Interview Prep",
-      description: "Practice coding challenges, system design interviews, and behavioral questions. Prepare for technical interviews at top companies.",
-      position: { x: 80, y: 94 },
-      difficulty: "Expert",
-      category: "Career",
-      icon: "Briefcase",
-      reward: 350,
-      color: colors.accent,
-      week: 12
-    },
-    {
-      id: 9,
-      title: "Dream Job",
-      description: "Land your dream developer position at a top tech company! Apply everything you've learned and start your amazing career journey.",
-      position: { x: 50, y: 106 },
-      difficulty: "Expert",
-      category: "Career",
-      icon: "Trophy",
-      reward: 500,
-      color: "#FFD700",
-      week: 13
-    }
-  ];
-
-  // Path connections between tasks
-  const pathConnections: PathConnection[] = [
-    { from: 1, to: 2 },
-    { from: 2, to: 3 },
-    { from: 3, to: 4 },
-    { from: 4, to: 5 },
-    { from: 5, to: 6 },
-    { from: 6, to: 7 },
-    { from: 7, to: 8 },
-    { from: 8, to: 9 }
-  ];
-
-  // Initialize animated values - Move this before the component renders
+  // All hooks must be called before any conditional returns
+  
+  // Load roadmaps on mount
   useEffect(() => {
-    roadmapData.forEach((task: TaskData) => {
-      if (!animatedValues[task.id]) {
-        animatedValues[task.id] = new Animated.Value(1);
-      }
-      if (!expandAnimations[task.id]) {
-        expandAnimations[task.id] = new Animated.Value(0);
-      }
-    });
-  }, []); // Remove dependencies to prevent re-initialization
+    loadUserRoadmaps().catch(console.error);
+  }, []);
 
-  const totalRewards: number = Array.from(completedTasks).reduce((sum: number, taskId: number) => {
-    const task = roadmapData.find((t: TaskData) => t.id === taskId);
-    return sum + (task?.reward || 0);
-  }, 0);
+  // Auto-select first roadmap
+  useEffect(() => {
+    if (userRoadmaps.length > 0 && !currentRoadmapId) {
+      selectRoadmap(userRoadmaps[0].roadmap_id);
+    }
+  }, [userRoadmaps, currentRoadmapId]);
+
+  // Load week data for visualization (simplified approach)
+  useEffect(() => {
+    if (currentRoadmapId && userRoadmaps.length > 0) {
+      const currentRoadmap = userRoadmaps.find(rm => rm.roadmap_id === currentRoadmapId);
+      if (currentRoadmap) {
+        // Create mock weeks based on duration for visualization
+        const weeks = Array.from({ length: currentRoadmap.duration_weeks }, (_, i) => ({
+          week_index: i + 1,
+          theme: `Week ${i + 1}`,
+          weekly_task: `Learning objectives for week ${i + 1}`,
+          skills_focus: ['General'],
+          completed_percentage: Math.random() * 100 // Mock completion
+        }));
+        setRoadmapWeeks(weeks);
+        
+        // Mock some completed weeks based on progress
+        const completedCount = Math.floor((currentRoadmap.progress_percentage / 100) * weeks.length);
+        const completed = new Set(Array.from({ length: completedCount }, (_, i) => i + 1));
+        setCompletedWeeks(completed);
+      }
+    }
+  }, [currentRoadmapId, userRoadmaps]);
+
+  // Auto-scroll to bottom on component mount to show current week
+  useEffect(() => {
+    if (scrollViewRef.current && roadmapWeeks.length > 0) {
+      setTimeout(() => {
+        scrollViewRef.current?.scrollToEnd({ animated: true });
+      }, 500);
+    }
+  }, [roadmapWeeks.length]);
+
+  // Convert weeks to TaskData format (reversed order - start from bottom)
+  const roadmapTasks: TaskData[] = roadmapWeeks
+    .slice()
+    .reverse()
+    .map((week, index) => ({
+      id: week.week_index,
+      title: week.theme,
+      description: week.weekly_task,
+      position: { 
+        x: index % 2 === 0 ? 20 : 80, 
+        y: 10 + (index * 12) 
+      },
+      difficulty: week.week_index <= 4 ? 'Beginner' : 
+                  week.week_index <= 8 ? 'Intermediate' : 
+                  week.week_index <= 10 ? 'Advanced' : 'Expert',
+      category: week.skills_focus.length > 0 ? week.skills_focus[0] : 'General',
+      icon: getIconForWeek(week.week_index),
+      reward: 50 + (week.week_index * 20),
+      color: getColorForWeek(week.week_index),
+      week: week.week_index,
+      completed: completedWeeks.has(week.week_index)
+    }));
+
+  // Helper functions for dynamic styling
+  function getIconForWeek(weekIndex: number): keyof typeof IconMap {
+    const icons: (keyof typeof IconMap)[] = ['Code', 'Settings', 'Star', 'Users', 'Code', 'Target', 'Settings', 'Briefcase', 'Trophy'];
+    return icons[(weekIndex - 1) % icons.length] || 'Code';
+  }
+
+  function getColorForWeek(weekIndex: number): string {
+    const colorPalette = [colors.success, colors.primary, colors.warning, colors.accent, colors.error];
+    return colorPalette[(weekIndex - 1) % colorPalette.length] || colors.primary;
+  }
+
+  // Path connections between tasks (dynamic based on roadmap length)
+  const pathConnections: PathConnection[] = roadmapTasks.length > 1 
+    ? roadmapTasks.slice(0, -1).map((task, index) => ({ 
+        from: task.id, 
+        to: roadmapTasks[index + 1].id 
+      }))
+    : [];
+
+  // Initialize animated values for all tasks
+  roadmapTasks.forEach((task: TaskData) => {
+    if (!animatedValues[task.id]) {
+      animatedValues[task.id] = new Animated.Value(1);
+    }
+    if (!expandAnimations[task.id]) {
+      expandAnimations[task.id] = new Animated.Value(0);
+    }
+  });
+
+  const totalRewards: number = roadmapTasks
+    .filter(task => task.completed)
+    .reduce((sum: number, task: TaskData) => sum + task.reward, 0);
 
   const handleTaskClick = (task: TaskData): void => {
     if (isTaskUnlocked(task.id)) {
@@ -230,11 +202,12 @@ const CareerRoadmapMario: React.FC = () => {
     }
   };
 
-  const handleCompleteTask = (taskId: number): void => {
-    if (!completedTasks.has(taskId)) {
-      const newCompleted = new Set(completedTasks);
+  const handleCompleteTask = async (taskId: number): Promise<void> => {
+    if (!completedWeeks.has(taskId)) {
+      // Optimistic update
+      const newCompleted = new Set(completedWeeks);
       newCompleted.add(taskId);
-      setCompletedTasks(newCompleted);
+      setCompletedWeeks(newCompleted);
       
       // Animate the completion
       Animated.sequence([
@@ -257,16 +230,19 @@ const CareerRoadmapMario: React.FC = () => {
         duration: 300,
         useNativeDriver: false,
       }).start();
+
+      // Note: In a real implementation, you would call the API here
+      // For now, this is just visual feedback
+      console.log(`Week ${taskId} marked as completed`);
     }
   };
 
   const isTaskUnlocked = (taskId: number): boolean => {
-    if (taskId === 1) return true;
-    const prerequisites = pathConnections.filter((conn: PathConnection) => conn.to === taskId);
-    return prerequisites.some((prereq: PathConnection) => completedTasks.has(prereq.from));
+    // All tasks are unlocked for viewing
+    return true;
   };
 
-  const isTaskCompleted = (taskId: number): boolean => completedTasks.has(taskId);
+  const isTaskCompleted = (taskId: number): boolean => completedWeeks.has(taskId);
 
   const getTaskStatus = (taskId: number): TaskStatus => {
     if (isTaskCompleted(taskId)) return 'completed';
@@ -275,8 +251,8 @@ const CareerRoadmapMario: React.FC = () => {
   };
 
   const generatePath = (from: number, to: number): string => {
-    const task1 = roadmapData.find((t: TaskData) => t.id === from);
-    const task2 = roadmapData.find((t: TaskData) => t.id === to);
+    const task1 = roadmapTasks.find((t: TaskData) => t.id === from);
+    const task2 = roadmapTasks.find((t: TaskData) => t.id === to);
     
     if (!task1 || !task2) return '';
     
@@ -293,6 +269,34 @@ const CareerRoadmapMario: React.FC = () => {
     
     return `M ${x1} ${y1} Q ${x1} ${midY} ${(x1 + x2) / 2} ${midY} Q ${x2} ${midY} ${x2} ${y2}`;
   };
+
+  // Show loading state
+  if (isLoadingRoadmaps) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.centerContent}>
+          <ActivityIndicator size="large" color={colors.primary} />
+          <Text style={styles.loadingText}>Loading your roadmap...</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+  // Show empty state if no roadmap data
+  if (userRoadmaps.length === 0 || roadmapTasks.length === 0) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.centerContent}>
+          <FontAwesome5 name="map" size={48} color={colors.border} />
+          <Text style={styles.emptyText}>No roadmap available</Text>
+          <Text style={styles.emptySubtext}>Generate a roadmap to get started!</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+
+  const currentRoadmap = userRoadmaps.find(rm => rm.roadmap_id === currentRoadmapId);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -312,13 +316,16 @@ const CareerRoadmapMario: React.FC = () => {
         
         <View style={styles.progressContainer}>
           <Text style={styles.progressText}>
-            {completedTasks.size}/{roadmapData.length} tasks completed
+            {currentRoadmap?.target_role} - {Math.round(currentRoadmap?.progress_percentage || 0)}% Complete
+          </Text>
+          <Text style={styles.progressSubtext}>
+            {completedWeeks.size}/{roadmapTasks.length} weeks completed
           </Text>
           <View style={styles.progressBarBackground}>
             <View 
               style={[
                 styles.progressBarFill,
-                { width: `${(completedTasks.size / roadmapData.length) * 100}%` }
+                { width: `${roadmapTasks.length > 0 ? (completedWeeks.size / roadmapTasks.length) * 100 : 0}%` }
               ]} 
             />
           </View>
@@ -336,17 +343,8 @@ const CareerRoadmapMario: React.FC = () => {
         <View style={styles.roadmapMap}>
           {/* SVG Background Lines */}
           <Svg style={styles.svgContainer} width="100%" height="100%">
-            {/* Main path line */}
-            <Path
-              d={`M ${(screenWidth - 40) * 0.5} 0 L ${(screenWidth - 40) * 0.5} ${screenHeight * 3}`}
-              stroke={colors.border}
-              strokeWidth="4"
-              fill="none"
-              opacity={0.3}
-            />
-            
             {pathConnections.map((connection: PathConnection, index: number) => {
-              const isPathActive = completedTasks.has(connection.from);
+              const isPathActive = completedWeeks.has(connection.from);
               const isNextTaskUnlocked = isTaskUnlocked(connection.to);
               return (
                 <Path
@@ -364,7 +362,7 @@ const CareerRoadmapMario: React.FC = () => {
           </Svg>
 
           {/* Task Nodes */}
-          {roadmapData.map((task: TaskData) => {
+          {roadmapTasks.map((task: TaskData) => {
             const status: TaskStatus = getTaskStatus(task.id);
             const mapWidth = screenWidth - 40;
             const mapHeight = screenHeight * 3;
@@ -541,7 +539,7 @@ const CareerRoadmapMario: React.FC = () => {
                         onPress={() => handleCompleteTask(task.id)}
                       >
                         <FontAwesome5 name="play" size={12} color="white" />
-                        <Text style={styles.completeTaskButtonText}>Complete Task</Text>
+                        <Text style={styles.completeTaskButtonText}>Complete Week</Text>
                       </TouchableOpacity>
                     )}
 
@@ -573,6 +571,38 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
+  },
+  centerContent: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  loadingText: {
+    marginTop: 16,
+    fontSize: 16,
+    color: colors.text,
+    textAlign: 'center',
+  },
+  errorText: {
+    marginTop: 16,
+    fontSize: 16,
+    color: colors.error,
+    textAlign: 'center',
+  },
+  emptyText: {
+    marginTop: 16,
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: colors.text,
+    textAlign: 'center',
+  },
+  emptySubtext: {
+    marginTop: 8,
+    fontSize: 14,
+    color: colors.text,
+    opacity: 0.7,
+    textAlign: 'center',
   },
   header: {
     padding: 16,
@@ -626,9 +656,17 @@ const styles = StyleSheet.create({
   },
   progressText: {
     color: colors.text,
+    fontSize: 14,
+    fontWeight: '600',
+    marginBottom: 4,
+    textAlign: 'center',
+  },
+  progressSubtext: {
+    color: colors.text,
     fontSize: 12,
     marginBottom: 6,
     textAlign: 'center',
+    opacity: 0.7,
   },
   progressBarBackground: {
     width: '100%',

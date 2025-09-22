@@ -266,6 +266,7 @@ class GapAnalysisLLM:
             
             ## OUTPUT REQUIREMENTS ##
             
+            CRITICAL: Return ONLY pure JSON - NO markdown, NO code blocks, NO ```json wrapper, NO explanations.
             Return ONLY valid JSON in this exact format:
             {{
               "meta": {{
@@ -273,12 +274,12 @@ class GapAnalysisLLM:
                 "generated_at": "{datetime.utcnow().isoformat()}Z"
               }},
               "summary": {{
-                "overall_fit_score": 0.0,
+                "overall_fit_score": "0.0",
                 "coverage": {{
-                  "required_total": 0,
-                  "met": 0,
-                  "partial": 0,
-                  "missing": 0
+                  "required_total": "0",
+                  "met": "0",
+                  "partial": "0",
+                  "missing": "0"
                 }}
               }},
               "categories": [
@@ -288,15 +289,22 @@ class GapAnalysisLLM:
                     {{
                       "skill": "Skill Name",
                       "priority_from_role": "High/Medium",
-                      "resume_rating": 0.0,
-                      "target_level": 1-5,
-                      "gap": 0.0,
+                      "resume_rating": "0.0",
+                      "target_level": "1-5",
+                      "gap": "0.0",
                       "status": "met/partial/missing"
                     }}
                   ]
                 }}
               ]
             }}
+            
+            **CRITICAL FORMATTING REQUIREMENTS**:
+            - Return ONLY the JSON object above
+            - NO markdown formatting (```json)
+            - NO code blocks
+            - NO explanations or additional text
+            - Start response with {{ and end with }}
             
             **IMPORTANT**: Use dependency inference to provide realistic, intelligent gap analysis that avoids recommending basic skills when advanced skills are already mastered.
             """
@@ -328,6 +336,8 @@ class GapAnalysisLLM:
                - Ensure no redundant learning recommendations for dependency skills
             
             Focus on creating a realistic assessment that recognizes skill transfer and dependencies.
+            
+            RESPOND WITH ONLY THE JSON OBJECT - NO OTHER TEXT OR FORMATTING.
             """
             
             messages = [

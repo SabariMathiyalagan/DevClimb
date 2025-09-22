@@ -10,9 +10,12 @@ import {
   Alert,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import { signOut } from 'aws-amplify/auth';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { colors } from '@/constants/Colors';
 import { mockUser } from '@/constants/MockData';
+import { useRoadmapDB } from '@/hooks/useRoadmapDB';
+import { configureCognito } from '@/config/cognito.config';
 
 interface SettingItem {
   id: string;
@@ -27,16 +30,43 @@ interface SettingItem {
 
 export default function SettingsScreen() {
   const router = useRouter();
+  const { userRoadmaps, clearAllData } = useRoadmapDB();
   const [darkMode, setDarkMode] = useState(true);
   const [notifications, setNotifications] = useState(true);
   const [streakReminders, setStreakReminders] = useState(true);
   const [questNotifications, setQuestNotifications] = useState(true);
 
-  const handleUpdateResume = () => router.push('/resume-update');
+  // Configure Cognito on component mount
+  React.useEffect(() => {
+    configureCognito();
+  }, []);
+
+  // Check if user has a roadmap (which means they have uploaded a resume)
+  const hasResume = userRoadmaps.length > 0;
+
+  const handleResumeAction = () => {
+    if (hasResume) {
+      router.push('/resume-update');
+    } else {
+      router.push('/upload-resume');
+    }
+  };
+
   const handleLogout = () => {
     Alert.alert('Logout', 'Are you sure you want to logout?', [
       { text: 'Cancel', style: 'cancel' },
-      { text: 'Logout', style: 'destructive', onPress: () => router.replace('../index') },
+      { text: 'Logout', style: 'destructive', onPress: async () => {
+        try {
+          await signOut();
+          clearAllData(); // Clear roadmap data on logout
+          router.push('/');
+        } catch (error) {
+          console.error('Error signing out:', error);
+          // Still clear data and redirect even if sign out fails
+          clearAllData();
+          router.push('/');
+        }
+      }},
     ]);
   };
   const handleDeleteAccount = () => {
@@ -50,9 +80,16 @@ export default function SettingsScreen() {
 
   const settingSections: { title: string; items: SettingItem[] }[] = [
     {
-      title: 'Profile',
+      title: 'Resume',
       items: [
-        { id: 'update-resume', title: 'Update Resume', subtitle: 'Refresh your skill assessment', icon: 'file-alt', type: 'navigation', onPress: handleUpdateResume },
+        { 
+          id: 'resume-action', 
+          title: hasResume ? 'Update Resume' : 'Add Resume', 
+          subtitle: hasResume ? 'Refresh your skill assessment' : 'Upload your resume to get started', 
+          icon: hasResume ? 'edit' : 'plus-circle', 
+          type: 'navigation', 
+          onPress: handleResumeAction 
+        },
       ],
     },
     {

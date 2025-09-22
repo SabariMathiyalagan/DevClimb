@@ -13,12 +13,15 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@aws-amplify/auth": "^6.15.1",
+    "@aws-amplify/react-native": "^1.1.10",
     "@expo/vector-icons": "^14.1.0",
     "@hookform/resolvers": "^5.2.1",
     "@react-native-async-storage/async-storage": "^2.1.0",
     "@react-navigation/native": "^7.1.6",
     "@shopify/flash-list": "^1.7.2",
     "@tanstack/react-query": "^5.51.1",
+    "aws-amplify": "^6.15.6",
     "date-fns": "^3.6.0",
     "expo": "~53.0.20",
     "expo-dev-client": "~5.2.4",

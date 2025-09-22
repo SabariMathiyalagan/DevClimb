@@ -29,12 +29,19 @@ logger = logging.getLogger(__name__)
 
 
 # Pydantic Models for Roadmap Schema
+class DailyTask(BaseModel):
+    """Daily task structure"""
+    day: int = Field(..., ge=1, le=7, description="Day of the week (1-7)")
+    tasks: List[str] = Field(..., min_items=1, description="List of tasks for the day")
+
+
 class Week(BaseModel):
-    """Simplified weekly roadmap structure"""
+    """Weekly roadmap structure with daily tasks"""
     week_index: int = Field(..., ge=1, le=12, description="Week number (1-12)")
     theme: str = Field(..., description="Weekly theme/focus area")
     skills_focus: List[str] = Field(..., min_items=1, description="Skills to focus on this week")
     weekly_task: str = Field(..., description="Weekly objective or main task")
+    daily_tasks: List[DailyTask] = Field(..., min_items=5, max_items=7, description="Daily tasks for the week")
 
 
 class RoadmapMeta(BaseModel):
@@ -82,39 +89,57 @@ class RoadmapAgent:
     
     def _create_system_prompt(self) -> str:
         """Create the system prompt for roadmap generation"""
-        return """Generate a simplified 12-week learning roadmap JSON. Be concise and focused.
+        return """Generate a comprehensive 12-week learning roadmap JSON with daily actionable tasks.
 
 REQUIREMENTS:
 - EXACTLY 12 weeks
 - Focus on skills with "missing" or "partial" status
 - Each week should have a clear theme and weekly objective
 - Skills should progress logically from basic to advanced
-
+- Each week must include 5-7 daily tasks with specific actionable items
+- Daily tasks should be practical, measurable, and build upon each other
+ CRITICAL: Return ONLY pure JSON - NO markdown, NO code blocks, NO ```json wrapper, NO explanations.
 RESPONSE FORMAT - ONLY THIS JSON STRUCTURE:
 {
   "meta": {
     "target_role": "role_name",
-    "duration_weeks": 12,
-    "weekly_hours_target": 8,
+    "duration_weeks": "12",
+    "weekly_hours_target": "8",
     "generated_at": "2025-01-01T00:00:00Z"
   },
   "roadmap": {
     "weeks": [
       {
-        "week_index": 1,
+        "week_index": "1",
         "theme": "Theme Name",
         "skills_focus": ["Skill1", "Skill2"],
-        "weekly_task": "Weekly Objective"
+        "weekly_task": "Weekly Objective",
+        "daily_tasks": [
+          {
+            "day": "1",
+            "tasks": [
+              "Specific actionable task 1",
+              "Specific actionable task 2"
+            ]
+          },
+          {
+            "day": "2",
+            "tasks": [
+              "Specific actionable task 1",
+              "Specific actionable task 2"
+            ]
+          }
+        ]
       }
     ]
   }
 }
 
-Generate ALL 12 weeks with meaningful themes and objectives. Return ONLY valid JSON."""
+Generate ALL 12 weeks with meaningful themes, objectives, and daily tasks. Each daily task should be specific and actionable. Return ONLY valid JSON."""
 
     def _create_human_prompt(self, gap_analysis: Dict[str, Any]) -> str:
         """Create the human prompt with gap analysis data"""
-        return f"""Based on this gap analysis, generate a comprehensive 12-week learning roadmap:
+        return f"""Based on this gap analysis, generate a comprehensive 12-week learning roadmap with daily actionable tasks:
 
 GAP ANALYSIS DATA:
 {json.dumps(gap_analysis, indent=2)}
@@ -124,8 +149,11 @@ ROADMAP REQUIREMENTS:
 - Duration: 12 weeks exactly
 - Address all skills in categories with appropriate difficulty based on status
 - Include practical projects and assessments
+- Each week must have 5-7 daily tasks that are specific and actionable
+- Daily tasks should build upon each other and lead to the weekly objective
+- Tasks should include hands-on coding, reading, practice exercises, and small projects
 
-Generate the complete roadmap JSON now."""
+Generate the complete roadmap JSON with daily tasks now."""
 
     def generate_roadmap(self, gap_analysis: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -201,13 +229,13 @@ def main():
         gap_analysis_sample = {
   "meta": {
     "target_role": "full_stack_engineer",
-    "generated_at": "2025-09-09T04:26:27.539518Z"
+    "generated_at": "2025-09-09T20:18:23.166437Z"
   },
   "summary": {
-    "overall_fit_score": 87.5,
+    "overall_fit_score": 4.33,
     "coverage": {
-      "required_total": 16,
-      "met": 12,
+      "required_total": 17,
+      "met": 13,
       "partial": 3,
       "missing": 1
     }
@@ -227,15 +255,15 @@ def main():
         {
           "skill": "React",
           "priority_from_role": "High",
-          "resume_rating": 5.0,
+          "resume_rating": 4.5,
           "target_level": 5,
-          "gap": 0.0,
+          "gap": 0.5,
           "status": "met"
         },
         {
           "skill": "HTML5",
           "priority_from_role": "High",
-          "resume_rating": 4.5,
+          "resume_rating": 4.05,
           "target_level": 4,
           "gap": 0.0,
           "status": "met"
@@ -243,7 +271,7 @@ def main():
         {
           "skill": "CSS3",
           "priority_from_role": "High",
-          "resume_rating": 4.5,
+          "resume_rating": 4.05,
           "target_level": 4,
           "gap": 0.0,
           "status": "met"
@@ -272,17 +300,17 @@ def main():
         {
           "skill": "Node.js",
           "priority_from_role": "High",
-          "resume_rating": 4.5,
-          "target_level": 5,
-          "gap": 0.5,
+          "resume_rating": 4.3,
+          "target_level": 4,
+          "gap": 0.0,
           "status": "met"
         },
         {
           "skill": "Express.js",
           "priority_from_role": "High",
           "resume_rating": 4.0,
-          "target_level": 5,
-          "gap": 1.0,
+          "target_level": 4,
+          "gap": 0.0,
           "status": "met"
         },
         {
@@ -310,17 +338,17 @@ def main():
           "skill": "MongoDB",
           "priority_from_role": "High",
           "resume_rating": 3.5,
-          "target_level": 5,
-          "gap": 1.5,
-          "status": "partial"
+          "target_level": 4,
+          "gap": 0.5,
+          "status": "met"
         },
         {
           "skill": "PostgreSQL",
           "priority_from_role": "High",
           "resume_rating": 3.5,
-          "target_level": 5,
-          "gap": 1.5,
-          "status": "partial"
+          "target_level": 4,
+          "gap": 0.5,
+          "status": "met"
         },
         {
           "skill": "MySQL",
@@ -338,37 +366,35 @@ def main():
         {
           "skill": "Git",
           "priority_from_role": "High",
-          "resume_rating": 3.5,
-          "target_level": 5,
-          "gap": 1.5,
-          "status": "partial"
+          "resume_rating": 4.0,
+          "target_level": 4,
+          "gap": 0.0,
+          "status": "met"
         },
         {
           "skill": "Webpack",
           "priority_from_role": "Medium",
-          "resume_rating": 3.6,
+          "resume_rating": 0.0,
           "target_level": 3,
-          "gap": 0.0,
-          "status": "met"
+          "gap": 3.0,
+          "status": "missing"
         },
         {
           "skill": "Babel",
           "priority_from_role": "Medium",
-          "resume_rating": 3.6,
+          "resume_rating": 0.0,
           "target_level": 3,
-          "gap": 0.0,
-          "status": "met"
+          "gap": 3.0,
+          "status": "missing"
         }
       ]
     }
   ]
-} 
+}
         # Generate roadmap
         roadmap = agent.generate_roadmap(gap_analysis_sample)
         
-        # Save roadmap to file
-        with open('learning_roadmap.json', 'w', encoding='utf-8') as f:
-            json.dump(roadmap, f, indent=2)
+      
         
         print("✅ Roadmap generated successfully!")
         print(f"📋 Target Role: {roadmap['meta']['target_role']}")

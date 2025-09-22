@@ -13,14 +13,12 @@ import { colors } from '@/constants/Colors';
 export default function WelcomeScreen() {
   const router = useRouter();
 
-  const handleGetStarted = () => {
-    // Navigate to signup screen
-    router.push('/(tabs)/dashboard');
+  const handleLogin = () => {
+    router.push('/onboarding/login');
   };
 
-  const handleSignIn = () => {
-    // Navigate to signup screen (same form for demo)
-    router.push('/(tabs)/dashboard');
+  const handleSignup = () => {
+    router.push('/upload-resume');
   };
 
   return (
@@ -49,18 +47,18 @@ export default function WelcomeScreen() {
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             style={styles.primaryButton}
-            onPress={handleGetStarted}
+            onPress={handleLogin}
             activeOpacity={0.8}
           >
-            <Text style={styles.primaryButtonText}>Get Started</Text>
+            <Text style={styles.primaryButtonText}>Login</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.secondaryButton}
-            onPress={handleSignIn}
+            onPress={handleSignup}
             activeOpacity={0.8}
           >
-            <Text style={styles.secondaryButtonText}>Already have an account?</Text>
+            <Text style={styles.secondaryButtonText}>Sign Up</Text>
           </TouchableOpacity>
         </View>
       </View>

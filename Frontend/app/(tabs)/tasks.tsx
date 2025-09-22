@@ -1,237 +1,126 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  ActivityIndicator,
+  SafeAreaView,
 } from 'react-native';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { colors } from '@/constants/Colors';
+import { useRoadmapDB } from '@/hooks/useRoadmapDB';
+import WeekView from '@/components/WeekView';
 
-// Icon components (you'll need to install react-native-vector-icons or use your preferred icon library)
-// import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+const TasksScreen: React.FC = () => {
+  const { 
+    userRoadmaps, 
+    currentRoadmapId, 
+    currentProgress, 
+    loadUserRoadmaps, 
+    selectRoadmap,
+    isLoadingRoadmaps 
+  } = useRoadmapDB();
 
-interface Quest {
-  id: number;
-  title: string;
-  description: string;
-  progress: number;
-  maxProgress: number;
-  xp: number;
-  iconName: string;
-  completed?: boolean;
-}
+  const [selectedWeekIndex, setSelectedWeekIndex] = useState<number>(1);
 
-interface WeeklyObjective {
-  title: string;
-  description: string;
-  progress: number;
-  maxProgress: number;
-  xp: number;
-  iconName: string;
-}
+  // Load roadmaps on mount
+  useEffect(() => {
+    loadUserRoadmaps().catch(console.error);
+  }, []);
 
-const WeeklyQuestCard: React.FC<{
-  title: string;
-  description: string;
-  progress: number;
-  maxProgress: number;
-  xp: number;
-  iconName: string;
-  completed?: boolean;
-}> = ({ title, description, progress, maxProgress, xp, iconName, completed = false }) => {
-  const progressPercentage = (progress / maxProgress) * 100;
-
-  return (
-    <View style={styles.weeklyQuestCard}>
-      <View style={styles.weeklyQuestHeader}>
-        <View style={styles.weeklyQuestIcon}>
-          <Text style={[styles.weeklyIconText, { color: completed ? colors.success : colors.primary }]}>
-            {iconName}
-          </Text>
-        </View>
-        <View style={styles.weeklyQuestContent}>
-          <Text style={styles.weeklyQuestTitle}>{title}</Text>
-          <Text style={styles.weeklyQuestDescription}>{description}</Text>
-          
-          <View style={styles.weeklyProgressContainer}>
-            <View style={styles.weeklyProgressBar}>
-              <View 
-                style={[
-                  styles.weeklyProgressFill,
-                  { 
-                    width: `${progressPercentage}%`,
-                    backgroundColor: completed ? colors.success : colors.primary
-                  }
-                ]} 
-              />
-            </View>
-            <View style={styles.weeklyQuestFooter}>
-              <Text style={styles.weeklyProgressText}>
-                {progress}/{maxProgress} daily objectives completed
-              </Text>
-              <View style={styles.weeklyXpContainer}>
-                <Text style={styles.weeklyXpText}>+{xp} XP</Text>
-                <Text style={[styles.weeklyStatusIcon, { color: completed ? colors.success : colors.border }]}>
-                  {completed ? '✓' : '○'}
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
-      </View>
-    </View>
-  );
-};
-
-const DailyQuestCard: React.FC<{
-  title: string;
-  description: string;
-  progress: number;
-  maxProgress: number;
-  xp: number;
-  iconName: string;
-  completed?: boolean;
-  onPress?: () => void;
-}> = ({ title, description, progress, maxProgress, xp, iconName, completed = false, onPress }) => {
-  const progressPercentage = (progress / maxProgress) * 100;
-
-  return (
-    <TouchableOpacity style={styles.dailyQuestCard} onPress={onPress} activeOpacity={0.7}>
-      <View style={styles.dailyQuestHeader}>
-        <View style={styles.dailyQuestIcon}>
-          <Text style={[styles.dailyIconText, { color: completed ? colors.success : colors.primary }]}>
-            {iconName}
-          </Text>
-        </View>
-        <View style={styles.dailyQuestContent}>
-          <Text style={styles.dailyQuestTitle}>{title}</Text>
-          <Text style={styles.dailyQuestDescription}>{description}</Text>
-          
-          <View style={styles.dailyProgressContainer}>
-            <View style={styles.dailyProgressBar}>
-              <View 
-                style={[
-                  styles.dailyProgressFill,
-                  { 
-                    width: `${progressPercentage}%`,
-                    backgroundColor: completed ? colors.success : colors.primary
-                  }
-                ]} 
-              />
-            </View>
-            <View style={styles.dailyQuestFooter}>
-              <Text style={styles.dailyProgressText}>
-                {progress}/{maxProgress} {maxProgress === 1 ? 'completed' : 'tasks'}
-              </Text>
-              <View style={styles.dailyXpContainer}>
-                <Text style={styles.dailyXpText}>+{xp} XP</Text>
-                <Text style={[styles.dailyStatusIcon, { color: completed ? colors.success : colors.border }]}>
-                  {completed ? '✓' : '○'}
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
-      </View>
-    </TouchableOpacity>
-  );
-};
-
-const QuestsScreen: React.FC = () => {
-  const weeklyObjective: WeeklyObjective = {
-    title: "AWS Solutions Architect Associate Certification",
-    description: "Complete preparation modules and practice exams to earn your first major cloud certification",
-    progress: 3,
-    maxProgress: 7,
-    xp: 500,
-    iconName: "🏆"
-  };
-
-  const dailyObjectives: Quest[] = [
-    {
-      id: 1,
-      title: "Study AWS VPC Fundamentals",
-      description: "Complete VPC networking module and take practice quiz",
-      progress: 1,
-      maxProgress: 1,
-      xp: 50,
-      iconName: "📚",
-      completed: true
-    },
-    {
-      id: 2,
-      title: "Build EC2 Lab Environment",
-      description: "Deploy and configure EC2 instances with security groups",
-      progress: 2,
-      maxProgress: 3,
-      xp: 75,
-      iconName: "💻"
-    },
-    {
-      id: 3,
-      title: "Practice IAM Policies",
-      description: "Create and test custom IAM roles and policies",
-      progress: 0,
-      maxProgress: 2,
-      xp: 60,
-      iconName: "🎯"
-    },
-    {
-      id: 4,
-      title: "Review S3 Storage Classes",
-      description: "Study different S3 storage options and use cases",
-      progress: 1,
-      maxProgress: 2,
-      xp: 40,
-      iconName: "📖"
+  // Auto-select first roadmap and current week
+  useEffect(() => {
+    if (userRoadmaps.length > 0 && !currentRoadmapId) {
+      selectRoadmap(userRoadmaps[0].roadmap_id);
     }
-  ];
+  }, [userRoadmaps, currentRoadmapId]);
 
-  const handleQuestPress = (questId?: number) => {
-    console.log('Quest pressed:', questId);
-    // Navigate to quest details or handle quest interaction
-  };
+  // Set current week when progress loads
+  useEffect(() => {
+    if (currentProgress && currentProgress.current_week !== selectedWeekIndex) {
+      setSelectedWeekIndex(currentProgress.current_week);
+    }
+  }, [currentProgress]);
+
+  // Show loading state
+  if (isLoadingRoadmaps) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.centerContent}>
+          <ActivityIndicator size="large" color={colors.primary} />
+          <Text style={styles.loadingText}>Loading your tasks...</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+  // Show empty state if no roadmaps
+  if (userRoadmaps.length === 0) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.centerContent}>
+          <FontAwesome5 name="tasks" size={48} color={colors.border} />
+          <Text style={styles.emptyText}>No tasks available</Text>
+          <Text style={styles.emptySubtext}>Generate a roadmap to get your daily tasks!</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+  const currentRoadmap = userRoadmaps.find(rm => rm.roadmap_id === currentRoadmapId);
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.headerIcon}>🏆</Text>
-        <Text style={styles.headerTitle}>Quests</Text>
-      </View>
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+        {/* Header */}
+        <View style={styles.header}>
+          <Text style={styles.headerIcon}>🏆</Text>
+          <Text style={styles.headerTitle}>Tasks</Text>
+        </View>
 
-      {/* Weekly Objective */}
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Weekly Objective</Text>
-        <WeeklyQuestCard
-          title={weeklyObjective.title}
-          description={weeklyObjective.description}
-          progress={weeklyObjective.progress}
-          maxProgress={weeklyObjective.maxProgress}
-          xp={weeklyObjective.xp}
-          iconName={weeklyObjective.iconName}
-        />
-      </View>
+        {/* Current Roadmap Info */}
+        {currentRoadmap && (
+          <View style={styles.roadmapInfo}>
+            <Text style={styles.roadmapTitle}>{currentRoadmap.target_role}</Text>
+            <Text style={styles.roadmapProgress}>
+              {Math.round(currentRoadmap.progress_percentage)}% Complete
+            </Text>
+          </View>
+        )}
 
-      {/* Daily Objectives */}
-      <View style={styles.section}>
-        <Text style={styles.sectionSubtitle}>Daily Objectives</Text>
-        {dailyObjectives.map((objective) => (
-          <DailyQuestCard
-            key={objective.id}
-            title={objective.title}
-            description={objective.description}
-            progress={objective.progress}
-            maxProgress={objective.maxProgress}
-            xp={objective.xp}
-            iconName={objective.iconName}
-            completed={objective.completed}
-            onPress={() => handleQuestPress(objective.id)}
-          />
-        ))}
-      </View>
-    </ScrollView>
+        {/* Week Navigation */}
+        {currentRoadmap && (
+          <View style={styles.weekNavigation}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {Array.from({ length: currentRoadmap.duration_weeks }, (_, i) => i + 1).map(weekNum => (
+                <TouchableOpacity
+                  key={weekNum}
+                  style={[
+                    styles.weekButton,
+                    selectedWeekIndex === weekNum && styles.selectedWeekButton
+                  ]}
+                  onPress={() => setSelectedWeekIndex(weekNum)}
+                >
+                  <Text style={[
+                    styles.weekButtonText,
+                    selectedWeekIndex === weekNum && styles.selectedWeekButtonText
+                  ]}>
+                    Week {weekNum}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </View>
+        )}
+
+        {/* Week Details */}
+        {currentRoadmapId && (
+          <WeekView roadmapId={currentRoadmapId} weekIndex={selectedWeekIndex} />
+        )}
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -239,13 +128,42 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
-    paddingHorizontal: 16,
-    paddingVertical: 24,
+  },
+  scrollView: {
+    flex: 1,
+  },
+  centerContent: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  loadingText: {
+    marginTop: 16,
+    fontSize: 16,
+    color: colors.text,
+    textAlign: 'center',
+  },
+  emptyText: {
+    marginTop: 16,
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: colors.text,
+    textAlign: 'center',
+  },
+  emptySubtext: {
+    marginTop: 8,
+    fontSize: 14,
+    color: colors.text,
+    opacity: 0.7,
+    textAlign: 'center',
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 32,
+    padding: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
   },
   headerIcon: {
     fontSize: 32,
@@ -256,170 +174,49 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: colors.text,
   },
-  section: {
-    marginBottom: 32,
+  roadmapInfo: {
+    padding: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
   },
-  sectionTitle: {
+  roadmapTitle: {
     fontSize: 20,
     fontWeight: '600',
     color: colors.text,
-    marginBottom: 16,
+    marginBottom: 4,
   },
-  sectionSubtitle: {
-    fontSize: 18,
-    fontWeight: '500',
-    color: colors.text,
-    opacity: 0.8,
-    marginBottom: 16,
-  },
-  // Weekly Quest Card Styles
-  weeklyQuestCard: {
-    backgroundColor: colors.cardBackground,
-    borderRadius: 16,
-    padding: 24,
-    marginBottom: 16,
-    borderWidth: 2,
-    borderColor: colors.primary,
-  },
-  weeklyQuestHeader: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-  },
-  weeklyQuestIcon: {
-    marginRight: 16,
-    paddingTop: 4,
-  },
-  weeklyIconText: {
-    fontSize: 32,
-  },
-  weeklyQuestContent: {
-    flex: 1,
-  },
-  weeklyQuestTitle: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: colors.text,
-    marginBottom: 8,
-    lineHeight: 28,
-  },
-  weeklyQuestDescription: {
+  roadmapProgress: {
     fontSize: 16,
-    color: colors.text,
-    opacity: 0.8,
-    marginBottom: 20,
-    lineHeight: 24,
-  },
-  weeklyProgressContainer: {
-    gap: 12,
-  },
-  weeklyProgressBar: {
-    height: 12,
-    backgroundColor: colors.border,
-    borderRadius: 6,
-    overflow: 'hidden',
-  },
-  weeklyProgressFill: {
-    height: '100%',
-    borderRadius: 6,
-  },
-  weeklyQuestFooter: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  weeklyProgressText: {
-    fontSize: 14,
-    color: colors.text,
-    opacity: 0.7,
+    color: colors.primary,
     fontWeight: '500',
   },
-  weeklyXpContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
+  weekNavigation: {
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
   },
-  weeklyXpText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: colors.accent,
-  },
-  weeklyStatusIcon: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  // Daily Quest Card Styles
-  dailyQuestCard: {
+  weekButton: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    marginHorizontal: 4,
+    marginLeft: 16,
+    borderRadius: 20,
     backgroundColor: colors.cardBackground,
-    borderRadius: 10,
-    padding: 14,
-    marginBottom: 10,
     borderWidth: 1,
     borderColor: colors.border,
   },
-  dailyQuestHeader: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
+  selectedWeekButton: {
+    backgroundColor: colors.primary,
+    borderColor: colors.primary,
   },
-  dailyQuestIcon: {
-    marginRight: 10,
-    paddingTop: 1,
-  },
-  dailyIconText: {
-    fontSize: 16,
-  },
-  dailyQuestContent: {
-    flex: 1,
-  },
-  dailyQuestTitle: {
+  weekButtonText: {
     fontSize: 14,
-    fontWeight: '600',
     color: colors.text,
-    marginBottom: 3,
+    fontWeight: '500',
   },
-  dailyQuestDescription: {
-    fontSize: 12,
-    color: colors.text,
-    opacity: 0.7,
-    marginBottom: 10,
-    lineHeight: 16,
-  },
-  dailyProgressContainer: {
-    gap: 6,
-  },
-  dailyProgressBar: {
-    height: 6,
-    backgroundColor: colors.border,
-    borderRadius: 3,
-    overflow: 'hidden',
-  },
-  dailyProgressFill: {
-    height: '100%',
-    borderRadius: 3,
-  },
-  dailyQuestFooter: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  dailyProgressText: {
-    fontSize: 11,
-    color: colors.text,
-    opacity: 0.6,
-  },
-  dailyXpContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-  },
-  dailyXpText: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: colors.accent,
-  },
-  dailyStatusIcon: {
-    fontSize: 14,
-    fontWeight: 'bold',
+  selectedWeekButtonText: {
+    color: 'white',
   },
 });
 
-export default QuestsScreen;
+export default TasksScreen;

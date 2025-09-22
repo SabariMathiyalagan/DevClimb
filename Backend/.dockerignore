@@ -1,0 +1,8 @@
+# Since we're using specific COPY commands, we can be more selective
+# Include everything except what we explicitly copy
+*
+!requirements.txt
+!app.py
+!gap_analysis_llm.py
+!roadmap_agent_llm.py
+!data/skill_map.json

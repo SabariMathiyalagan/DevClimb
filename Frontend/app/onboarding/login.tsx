@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -10,39 +10,50 @@ import {
   Alert,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import { signIn, getCurrentUser } from 'aws-amplify/auth';
 import { colors } from '@/constants/Colors';
+import { configureCognito } from '@/config/cognito.config';
 
 interface FormData {
-  name: string;
   email: string;
   password: string;
 }
 
 interface FormErrors {
-  name?: string;
   email?: string;
   password?: string;
 }
 
-export default function SignupScreen() {
+export default function LoginScreen() {
   const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
-    name: '',
     email: '',
     password: '',
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [isLoading, setIsLoading] = useState(false);
 
+  useEffect(() => {
+    // Configure Cognito on component mount
+    configureCognito();
+    
+    // Check if user is already authenticated
+    checkAuthState();
+  }, []);
+
+  const checkAuthState = async () => {
+    try {
+      await getCurrentUser();
+      // User is already logged in, redirect to dashboard
+      router.push('/(tabs)/dashboard');
+    } catch (error) {
+      // User not logged in, stay on login screen
+      console.log('User not authenticated');
+    }
+  };
+
   const validateForm = (): boolean => {
     const newErrors: FormErrors = {};
-
-    // Name validation
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
-    } else if (formData.name.trim().length < 2) {
-      newErrors.name = 'Name must be at least 2 characters';
-    }
 
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -55,15 +66,13 @@ export default function SignupScreen() {
     // Password validation
     if (!formData.password) {
       newErrors.password = 'Password is required';
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleCreateAccount = async () => {
+  const handleLogin = async () => {
     if (!validateForm()) {
       return;
     }
@@ -71,13 +80,29 @@ export default function SignupScreen() {
     setIsLoading(true);
 
     try {
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const user = await signIn({
+        username: formData.email,
+        password: formData.password,
+      });
+
+      console.log('Sign in successful:', user);
       
-      // Navigate to upload resume screen
-      router.push('/onboarding/upload-resume');
-    } catch (error) {
-      Alert.alert('Error', 'Failed to create account. Please try again.');
+      // Navigate directly to dashboard
+      router.push('/(tabs)/dashboard');
+    } catch (error: any) {
+      console.error('Sign in error:', error);
+      
+      let errorMessage = 'Login failed. Please try again.';
+      
+      if (error.name === 'NotAuthorizedException') {
+        errorMessage = 'Incorrect email or password';
+      } else if (error.name === 'UserNotFoundException') {
+        errorMessage = 'User not found. Please check your email.';
+      } else if (error.name === 'UserNotConfirmedException') {
+        errorMessage = 'Please confirm your account first.';
+      }
+      
+      Alert.alert('Login Failed', errorMessage);
     } finally {
       setIsLoading(false);
     }
@@ -97,35 +122,20 @@ export default function SignupScreen() {
         <View style={styles.content}>
           {/* Header */}
           <View style={styles.header}>
-            <Text style={styles.title}>Create Account</Text>
+            <Text style={styles.title}>Welcome Back</Text>
             <Text style={styles.subtitle}>
-              Join thousands of developers on their coding journey
+              Sign in to continue your coding journey
             </Text>
           </View>
 
           {/* Form */}
           <View style={styles.form}>
-            {/* Name Input */}
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>Full Name</Text>
-              <TextInput
-                style={[styles.input, errors.name && styles.inputError]}
-                placeholder="Enter your full name"
-                placeholderTextColor={colors.border}
-                value={formData.name}
-                onChangeText={(value) => updateFormData('name', value)}
-                autoCapitalize="words"
-                autoComplete="name"
-              />
-              {errors.name && <Text style={styles.errorText}>{errors.name}</Text>}
-            </View>
-
             {/* Email Input */}
             <View style={styles.inputGroup}>
-              <Text style={styles.label}>Email Address</Text>
+              <Text style={styles.label}>Email</Text>
               <TextInput
                 style={[styles.input, errors.email && styles.inputError]}
-                placeholder="Enter your email address"
+                placeholder="Enter your email"
                 placeholderTextColor={colors.border}
                 value={formData.email}
                 onChangeText={(value) => updateFormData('email', value)}
@@ -141,35 +151,28 @@ export default function SignupScreen() {
               <Text style={styles.label}>Password</Text>
               <TextInput
                 style={[styles.input, errors.password && styles.inputError]}
-                placeholder="Create a secure password"
+                placeholder="Enter your password"
                 placeholderTextColor={colors.border}
                 value={formData.password}
                 onChangeText={(value) => updateFormData('password', value)}
                 secureTextEntry
-                autoComplete="password-new"
+                autoComplete="current-password"
               />
               {errors.password && <Text style={styles.errorText}>{errors.password}</Text>}
             </View>
           </View>
 
-          {/* Create Account Button */}
+          {/* Login Button */}
           <TouchableOpacity
-            style={[styles.createButton, isLoading && styles.createButtonDisabled]}
-            onPress={handleCreateAccount}
+            style={[styles.loginButton, isLoading && styles.loginButtonDisabled]}
+            onPress={handleLogin}
             disabled={isLoading}
             activeOpacity={0.8}
           >
-            <Text style={styles.createButtonText}>
-              {isLoading ? 'Creating Account...' : 'Create Account'}
+            <Text style={styles.loginButtonText}>
+              {isLoading ? 'Signing In...' : 'Sign In'}
             </Text>
           </TouchableOpacity>
-
-          {/* Terms and Privacy */}
-          <Text style={styles.termsText}>
-            By creating an account, you agree to our{' '}
-            <Text style={styles.linkText}>Terms of Service</Text> and{' '}
-            <Text style={styles.linkText}>Privacy Policy</Text>
-          </Text>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -235,7 +238,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginTop: 4,
   },
-  createButton: {
+  loginButton: {
     backgroundColor: colors.primary,
     borderRadius: 12,
     paddingVertical: 16,
@@ -248,23 +251,12 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     elevation: 4,
   },
-  createButtonDisabled: {
+  loginButtonDisabled: {
     opacity: 0.6,
   },
-  createButtonText: {
+  loginButtonText: {
     fontSize: 18,
     fontWeight: '600',
     color: colors.text,
-  },
-  termsText: {
-    fontSize: 14,
-    color: colors.text,
-    opacity: 0.7,
-    textAlign: 'center',
-    lineHeight: 20,
-  },
-  linkText: {
-    color: colors.primary,
-    fontWeight: '600',
   },
 });
